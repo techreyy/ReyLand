@@ -63,7 +63,7 @@ button { font-family: inherit; }
 }
 #intro::before { left: -25vw; }
 #intro::after { right: -25vw; }
-#intro.close { clip-path: inset(14px calc(50% - 75px) calc(100% - 52px) calc(50% - 75px) round 19px); opacity: 0; }
+#intro.close { clip-path: var(--clip, inset(14px calc(50% - 75px) calc(100% - 52px) calc(50% - 75px) round 19px)); opacity: 0; }
 #intro.gone { display: none; }
 .intro-eyes { display: flex; gap: clamp(22px, 4vw, 40px); animation: introLook 2.2s ease .9s both; }
 .intro-eyes i {
@@ -72,7 +72,7 @@ button { font-family: inherit; }
   transform: scaleY(0.04);
   animation: introOpen .75s var(--spring) .25s forwards, introBlink .32s ease 2.05s;
 }
-#intro.close .intro-eyes { transform: translateY(-38vh) scale(.18); transition: transform .8s cubic-bezier(.75, 0, .2, 1); }
+#intro.close .intro-eyes { animation: none; transform: translate(var(--ex, 0), var(--ey, -38vh)) scale(var(--es, .18)); transition: transform .85s cubic-bezier(.75, 0, .2, 1); }
 .intro-skip { position: absolute; bottom: 28px; font-size: 12px; color: #4b5570; letter-spacing: .08em; }
 @keyframes introOpen { to { transform: scaleY(1); } }
 @keyframes introBlink { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.06); } }
@@ -148,7 +148,28 @@ button { font-family: inherit; }
 .btn svg { width: 18px; height: 18px; }
 
 /* ---------- Hero ---------- */
-.hero { padding: 150px 0 60px; text-align: center; }
+.hero { padding: 112px 0 60px; text-align: center; }
+/* Island hero: tempat intro mendarat, lalu memamerkan fitur bergantian */
+.h-stage { height: 92px; display: flex; justify-content: center; align-items: flex-start; margin-bottom: 14px; }
+.h-wrap { position: relative; display: flex; align-items: flex-start; transform: scale(1.3); transform-origin: 50% 0; cursor: pointer; }
+.hisland { position: relative; width: 150px; height: 38px; border-radius: 19px; background: #000; color: #fff; overflow: hidden; text-align: left; font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; box-shadow: 0 22px 50px rgba(15, 40, 110, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.05) inset; transition: width .7s var(--spring), height .7s var(--spring), border-radius .5s ease; }
+.hp { position: absolute; inset: 0; display: flex; align-items: center; gap: 10px; padding: 0 14px 0 8px; font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; transform: scale(.9); filter: blur(5px); transition: opacity .2s, transform .45s var(--spring), filter .3s; }
+.hp.on { opacity: 1; transform: none; filter: none; transition-delay: .18s; }
+.hp .robot { position: absolute; inset: 0; }
+.hp .art { width: 26px; height: 26px; border-radius: 7px; flex: none; background: linear-gradient(135deg, #3d8bff, #7cf7ff); }
+.hp.idle-pill { justify-content: space-between; padding: 0 16px; }
+.hp .avatar { width: 36px; height: 36px; }
+.hp.live-pill { gap: 0; padding: 0 8px 0 10px; }
+.h-mic { position: absolute; left: 100%; top: 0; width: 0; height: 34px; margin-left: 0; border-radius: 17px; background: #000; color: var(--green); display: flex; align-items: center; justify-content: center; gap: 6px; overflow: hidden; font: 700 12.5px "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; box-shadow: 0 22px 50px rgba(15, 40, 110, 0.35); opacity: 0; transition: width .7s var(--spring), margin-left .7s var(--spring), opacity .3s, color .3s; }
+.h-mic svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.h-mic .slash { display: none; }
+.h-mic.muted { color: var(--red); }
+.h-mic.muted .slash { display: inline; }
+.h-wrap.mic .h-mic { width: 84px; margin-left: 8px; opacity: 1; }
+.h-wrap { transition: translate .7s var(--spring); }
+.h-wrap.mic { translate: -46px 0; }
+.h-cap { position: absolute; top: calc(100% + 12px); left: 50%; translate: -50% 0; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7a8bb0; white-space: nowrap; transition: opacity .3s; }
+@media (max-width: 520px) { .h-wrap { transform: scale(1); } .h-stage { height: 70px; } }
 .pill-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--cyan); border: 1px solid rgba(124, 247, 255, 0.25); background: rgba(124, 247, 255, 0.06); padding: 6px 14px; border-radius: 999px; margin-bottom: 26px; }
 .pill-tag b { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .35; } }
@@ -356,33 +377,28 @@ body.ready .rise { animation: rise .8s var(--ease) forwards; animation-delay: ca
 .chip.on { color: #021022; background: linear-gradient(135deg, var(--cyan), var(--blue)); border-color: transparent; box-shadow: 0 8px 26px rgba(61, 139, 255, 0.35); }
 
 /* Island: wrapper mengatur posisi & lebar; Notch menempel di atas dengan sudut cekung */
-.iwrap { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 50; width: 150px; max-width: calc(100% - 24px); transition: width .6s var(--spring), top .6s var(--spring), transform .6s var(--spring); }
-.island { position: relative; background: #000; color: #fff; overflow: hidden; text-align: left; height: 38px; border-radius: 19px; transition: height .6s var(--spring), border-radius .45s ease, box-shadow .4s; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
-/* Telinga notch 12 px, sama dengan IslandShape.EarSize di aplikasi */
-.iwrap::before, .iwrap::after, .mic-b::before, .mic-b::after { content: ""; position: absolute; top: 0; width: 12px; height: 12px; opacity: 0; transition: opacity .3s .15s; pointer-events: none; }
-.iwrap::before, .mic-b::before { left: -12px; background: radial-gradient(circle at 0 100%, transparent 11.5px, #000 12px); }
-.iwrap::after, .mic-b::after { right: -12px; background: radial-gradient(circle at 100% 100%, transparent 11.5px, #000 12px); }
+.iwrap { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 50; width: 210px; max-width: calc(100% - 24px); transition: top .5s var(--spring); }
+/* Ukuran & sudut island diatur per frame oleh shape (pegas), bukan transisi CSS */
+.island { position: relative; background: #000; color: #fff; overflow: hidden; text-align: left; height: 34px; border-radius: 17px; transition: box-shadow .4s, background .6s; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
+.robot-big .island { height: 38px; border-radius: 19px; }
+/* Telinga cekung notch 12 px (IslandShape.EarSize), satu path SVG yang ikut digambar ulang tiap frame */
+.ears { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: visible; pointer-events: none; color: #000; }
+.ears path { fill: currentColor; }
+.island.aurora ~ .ears { color: #080e22; }
 
-/* Gelembung mikrofon saat rapat: "membelah diri" dari island, 84 px, setinggi island utama, jarak 8 px (Notch 30 px) */
-.mic-b { position: absolute; top: 0; left: 100%; width: 0; height: 34px; margin-left: 0; padding: 0; border: 0; border-radius: 17px; background: #000; color: var(--green); display: flex; align-items: center; justify-content: center; gap: 6px; font: 700 12.5px "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; white-space: nowrap; opacity: 0; pointer-events: none; cursor: pointer; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); transition: width .6s var(--spring), margin-left .6s var(--spring), height .6s var(--spring), border-radius .45s, opacity .25s, color .2s; }
+/* Gelembung mikrofon saat rapat: "membelah diri" dari island (84 px, setinggi island, jarak 8 px / Notch 30 px) */
+.mic-b { position: absolute; top: 0; left: 210px; width: 0; height: 17px; padding: 0; border: 0; border-radius: 9px; background: #000; color: var(--green); display: flex; align-items: center; justify-content: center; gap: 6px; overflow: hidden; font: 700 12.5px "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; white-space: nowrap; opacity: 0; pointer-events: none; cursor: pointer; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); transition: color .2s; }
 .mic-b svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.mic-b > * { opacity: calc((var(--t, 0) - .6) * 2.5); transform: scale(calc(.7 + var(--t, 0) * .3)); }
 .mic-b .slash { display: none; }
-.mic-b > * { opacity: 0; transition: opacity .2s; }
-.iwrap.mic .mic-b { width: 84px; margin-left: 8px; opacity: 1; pointer-events: auto; }
-.iwrap.mic .mic-b > * { opacity: 1; transition-delay: .25s; }
-.iwrap.mic { transform: translateX(calc(-50% - 46px)); }
-.notch .iwrap.mic .mic-b { margin-left: 30px; }
-.notch .iwrap.mic { transform: translateX(calc(-50% - 57px)); }
-.notch .mic-b { border-top-left-radius: 0; border-top-right-radius: 0; box-shadow: none; }
-.notch .iwrap.mic .mic-b::before, .notch .iwrap.mic .mic-b::after { opacity: 1; }
+.notch .mic-b { box-shadow: none; }
 .mic-b.muted { color: var(--red); }
 .mic-b.muted .slash { display: inline; }
 .mic-b .lbl-h { display: none; }
 .mic-b:hover .lbl-n { display: none; }
 .mic-b:hover .lbl-h { display: inline; }
 .notch .iwrap { top: 0; }
-.notch .iwrap::before, .notch .iwrap::after { opacity: 1; }
-.notch .island { border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; box-shadow: none; }
+.notch .island { box-shadow: none; }
 
 .island .page { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
 .island .page.on { opacity: 1; pointer-events: auto; transition: opacity .35s ease .18s; }
@@ -695,8 +711,23 @@ footer a:hover { color: var(--cyan); }
 .variant button.on { color: #fff; }
 .variant .knob { background: linear-gradient(135deg, var(--accent-2), var(--accent)); box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35); }
 .laptop::before { opacity: calc(.28 + var(--lvl) * 1.2); }
-.lid { box-shadow: 0 0 0 1px #2d3341 inset, 0 0 0 1.5px #06070a, 0 50px 90px rgba(15, 40, 110, 0.28); }
-.base { box-shadow: 0 24px 50px rgba(15, 40, 110, 0.25); }
+/* Laptop aluminium: bezel tipis, tepi berkilau, engsel & alas dengan pantulan */
+.lid { padding: 14px 12px 12px; border-radius: 20px 20px 10px 10px; background: linear-gradient(180deg, #2a2f3a 0%, #12151c 9%, #0a0c11 100%); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07) inset, 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 0 0 1.5px #8d96a8, 0 0 0 2.5px #2a2f3a, 0 50px 90px rgba(15, 40, 110, 0.3); }
+.lid .cam { top: 4px; }
+.lid .cam::after { content: ""; position: absolute; left: 12px; top: 1px; width: 4px; height: 4px; border-radius: 50%; background: #30d158; box-shadow: 0 0 6px #30d158, 0 0 12px rgba(48, 209, 88, 0.7); opacity: 0; transition: opacity .3s; }
+.laptop.cam-on .lid .cam::after { opacity: 1; }
+.base { height: 18px; margin: 0 -34px; border-radius: 3px 3px 22px 22px / 3px 3px 16px 16px; background: linear-gradient(180deg, #e3e7ef 0%, #b9c0cd 22%, #8a92a3 55%, #4b5262 100%); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 26px 50px rgba(15, 40, 110, 0.28); }
+.base::before { width: 16%; height: 7px; background: linear-gradient(180deg, #7d8597, #a9b0bd); }
+.laptop::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -46px; height: 40px; border-radius: 50%; background: radial-gradient(closest-side, rgba(15, 40, 110, 0.32), transparent); filter: blur(6px); z-index: -1; }
+/* Menyala: logo Windows + putaran, lalu island bangun di atas layar */
+.boot { position: absolute; inset: 0; z-index: 95; background: #000; display: grid; place-items: center; align-content: center; gap: 34px; transition: opacity .7s ease; }
+.boot .win-logo { width: 54px; height: 54px; gap: 4px; }
+.boot .spin { width: 26px; height: 26px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.14); border-top-color: #fff; animation: spin .9s linear infinite; }
+.boot.off { opacity: 0; pointer-events: none; }
+.boot.gone { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.iwrap.sleep { opacity: 0; }
+.iwrap { transition: top .5s var(--spring), opacity .35s ease; }
 .chip { background: #fff; box-shadow: 0 2px 8px rgba(30, 64, 175, 0.05); }
 .chip:hover { color: var(--accent); border-color: rgba(37, 99, 235, 0.4); }
 .chip.on { color: #fff; background: linear-gradient(135deg, var(--accent-2), var(--accent)); box-shadow: 0 8px 22px rgba(37, 99, 235, 0.32); }
@@ -1055,6 +1086,20 @@ footer a:hover { color: #fff; }
     <div class="float f4 eyes-only"><i></i><i></i></div>
   </div>
   <div class="wrap">
+    <div class="h-stage">
+      <div class="h-wrap" id="hWrap" title="Coba langsung di laptop di bawah">
+        <div class="hisland" id="hIsland">
+          <div class="hp on" data-h="robot"><div class="robot"><div class="bottom"></div><div class="eyes" id="hEyes"><i></i><i></i></div></div></div>
+          <div class="hp" data-h="music"><span class="art"></span><span class="txt">Langit Biru · Rey</span><span class="eq" style="margin-left:auto"><i></i><i></i><i></i><i></i></span></div>
+          <div class="hp" data-h="notif"><span class="avatar">D</span><span class="notif-txt"><b>Dinda</b><span>Udah coba ReyLand belum? 👀</span></span><span class="notif-time">sekarang</span></div>
+          <div class="hp live-pill" data-h="pray" style="--lv:#30d158"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b class="lv-t">Ashar 15.02</b><span class="lv-d">8 menit lagi</span></div>
+          <div class="hp live-pill" data-h="meet" style="--lv:#0a84ff"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M3,7 H13.5 V15 H3 Z M13.5,9.6 L18.8,6.8 V15.2 L13.5,12.4"/></svg></span><b class="lv-t">Rapat tim mingguan</b><span class="lv-d">2 menit lagi</span><span class="lv-btn">Gabung</span></div>
+          <div class="hp idle-pill" data-h="clock"><span class="mono" id="hClock">10.42</span><span class="bat">80%<i></i></span></div>
+        </div>
+        <div class="h-mic" id="hMic"><svg viewBox="0 0 22 22"><path d="M11,3.2 A2.6,2.6 0 0 1 13.6,5.8 V10.6 A2.6,2.6 0 0 1 8.4,10.6 V5.8 A2.6,2.6 0 0 1 11,3.2 Z M5.8,10.2 A5.2,5.2 0 0 0 16.2,10.2 M11,15.4 V18.6"/><path class="slash" d="M4,3.5 L18,17.5"/></svg><span id="hMicL">Mic</span></div>
+        <span class="h-cap" id="hCap">Island ReyLand · langsung di atas layar</span>
+      </div>
+    </div>
     <span class="pill-tag rise" style="--i:0"><b></b>Versi 1.2.0 sudah rilis · Windows 10 &amp; 11</span>
     <h1 class="rise" style="--i:1">Bagian atas layarmu, <span class="glow">kini hidup.</span></h1>
     <p class="lead rise" style="--i:2">ReyLand mengubah tepi atas layar Windows jadi island kecil: musik dan lirik, jadwal sholat dan adzan, mode rapat dengan tombol mic, timer, shelf file, kirim file ke HP, dan notifikasi. Muncul saat perlu, minggir saat tidak.</p>
@@ -1209,7 +1254,7 @@ footer a:hover { color: #fff; }
           <div class="snip" id="snip"><div class="sel" id="sel"></div><div class="hint">Seret untuk memilih area · Esc untuk batal</div></div>
           <div class="flash" id="flash"></div>
 
-          <div class="iwrap" id="iwrap">
+          <div class="iwrap sleep" id="iwrap">
             <div class="island" id="island">
               <div class="page" data-page="idle">
                 <div class="pill idle-pill"><span class="mono" id="iClock">00.00</span><span class="bat">80%<i></i></span></div>
@@ -1333,9 +1378,11 @@ footer a:hover { color: #fff; }
                 <button class="arrow r" aria-label="Berikutnya"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
               </div>
             </div>
+            <svg class="ears" id="ears" aria-hidden="true"><path d=""/></svg>
             <button class="mic-b" id="micB" aria-label="Bisukan / nyalakan mikrofon" title="Bisukan / nyalakan mikrofon (berlaku untuk semua aplikasi rapat)"><svg viewBox="0 0 22 22"><path d="M11,3.2 A2.6,2.6 0 0 1 13.6,5.8 V10.6 A2.6,2.6 0 0 1 8.4,10.6 V5.8 A2.6,2.6 0 0 1 11,3.2 Z M5.8,10.2 A5.2,5.2 0 0 0 16.2,10.2 M11,15.4 V18.6"/><path class="slash" d="M4,3.5 L18,17.5"/></svg><span class="lbl-n" id="micLbl">Mic</span><span class="lbl-h">Bisukan</span></button>
           </div>
 
+          <div class="boot" id="boot"><span class="win-logo"><i></i><i></i><i></i><i></i></span><span class="spin"></span></div>
           <div class="glare"></div>
         </div>
       </div>
@@ -1626,7 +1673,7 @@ const STATES = {
   timer:   { w: 480, h: 188, r: 32, hub: true },
   shelf:   { w: 480, h: 214, r: 32, hub: true },
   capture: { w: 480, h: 188, r: 32, hub: true },
-  today:   { w: 480, h: 202, r: 32, hub: true },
+  today:   { w: 480, h: 214, r: 32, hub: true },
   remind:  { w: 480, h: 188, r: 32, hub: true },
   live:    { w: 240, h: 40, r: 20 },
   rec:     { w: 260, h: 44, r: 22 },
@@ -1666,18 +1713,64 @@ function show(name) {
   if (name === "compact") w = clamp(textW($("cLine").textContent, 13) + 88, 200, 560);
   if (name === "notif") w = clamp(Math.max(textW($("nTitle").textContent, 13, 700), textW($("nText").textContent, 12.5, 500)) + 76 + 56, 240, 520);
   if (name === "live" && live.cur) w = clamp(textW(live.cur.title, 13) + textW(live.cur.detail, 11.5) + (live.cur.action ? textW(live.cur.action, 12, 700) + 34 : 0) + 71, 240, 460);
-  iwrap.style.width = w + "px";
   // Gelembung mic hanya di samping jam/robot, setinggi island utama.
   const mic = meet.on && (name === "idle" || name === "robot");
-  iwrap.classList.toggle("mic", mic);
-  micB.style.height = s.h + "px"; micB.style.borderRadius = s.r + "px";
+  shape.to(w, s.h, s.r, mic ? 84 : 0);
   island.classList.toggle("remind", name === "robot" && remind.on);
-  island.style.height = s.h + "px";
-  island.style.borderRadius = s.r + "px";
   island.classList.toggle("hub", !!s.hub);
   island.querySelectorAll(".page").forEach(p => p.classList.toggle("on", p.dataset.page === name));
   island.querySelectorAll("[data-go]").forEach(b => b.classList.toggle("on", b.dataset.go === name));
 }
+// ---------- Bentuk island: dianimasikan per frame dengan pegas, seperti IslandShape di aplikasi ----------
+// Badan, telinga notch, dan gelembung mic dihitung dari angka yang sama setiap frame, jadi tidak pernah
+// ada celah atau sudut yang tertinggal saat island membesar/mengecil.
+const shape = (() => {
+  const ears = $("ears"), earPath = ears.querySelector("path");
+  const K = 420, C = 27; // kekakuan & redaman: sedikit memantul, mirip pegas di aplikasi
+  const ax = { w: [210, 210, 0], h: [34, 34, 0], r: [17, 17, 0], b: [0, 0, 0] }; // [nilai, target, kecepatan]
+  let raf = 0, last = 0;
+  const notchVariant = () => scr.classList.contains("notch");
+  function paint() {
+    const w = Math.max(0, ax.w[0]), h = Math.max(0, ax.h[0]), r = clamp(ax.r[0], 0, Math.min(w, h) / 2), b = Math.max(0, ax.b[0]);
+    const notch = notchVariant(), t = clamp(b / 84, 0, 1), gap = (notch ? 30 : 8) * t;
+    const bh = Math.min(h, 40) * (0.5 + 0.5 * t), br = Math.min(bh, b) / 2;
+    iwrap.style.width = w + "px";
+    iwrap.style.transform = `translateX(calc(-50% - ${((gap + b) / 2).toFixed(2)}px))`;
+    island.style.height = h + "px";
+    island.style.borderRadius = notch ? `0 0 ${r}px ${r}px` : r + "px";
+    const bx = w + gap;
+    Object.assign(micB.style, { left: bx + "px", width: b + "px", height: bh + "px", top: (notch ? 0 : (h - bh) / 2) + "px",
+      borderRadius: notch ? `0 0 ${br}px ${br}px` : br + "px", opacity: t > .04 ? 1 : 0, pointerEvents: t > .9 ? "auto" : "none" });
+    micB.style.setProperty("--t", t.toFixed(3));
+    // Telinga cekung notch (12 px) di kiri-kanan badan dan gelembung.
+    let d = "";
+    if (notch) {
+      const ear = (x0, x1, e) => e > .2 ? `M${x0 - e},0A${e},${e} 0 0 1 ${x0},${e}V0Z M${x1},${e}A${e},${e} 0 0 1 ${x1 + e},0H${x1}Z ` : "";
+      d += ear(0, w, Math.min(12, h / 2));
+      if (b > .5) d += ear(bx, bx + b, Math.min(12 * t, bh / 2));
+    }
+    earPath.setAttribute("d", d);
+  }
+  function step(now) {
+    const dt = Math.min(.032, (now - last) / 1000 || .016); last = now;
+    let moving = false;
+    for (const a of Object.values(ax)) {
+      a[2] += (K * (a[1] - a[0]) - C * a[2]) * dt;
+      a[0] += a[2] * dt;
+      if (Math.abs(a[1] - a[0]) > .05 || Math.abs(a[2]) > .05) moving = true; else { a[0] = a[1]; a[2] = 0; }
+    }
+    paint();
+    raf = moving ? requestAnimationFrame(step) : 0;
+  }
+  return {
+    to(w, h, r, b) {
+      ax.w[1] = w; ax.h[1] = h; ax.r[1] = r; ax.b[1] = b;
+      if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); }
+    },
+    from(w, h, r) { ax.w[0] = w; ax.h[0] = h; ax.r[0] = r; ax.w[2] = ax.h[2] = ax.r[2] = 0; paint(); },
+    paint
+  };
+})();
 function flashState(name, ms) {
   transient = name;
   clearTimeout(transientT);
@@ -1739,6 +1832,7 @@ function setVariant(v) {
   if (v !== variant) { flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go"); }
   variant = v;
   scr.classList.toggle("notch", v === "notch");
+  shape.paint();
   document.querySelectorAll("[data-variant]").forEach(b => {
     const on = b.dataset.variant === v;
     b.classList.toggle("on", on);
@@ -2258,6 +2352,7 @@ function startMeet() {
   meet.resume = player.playing;
   if (player.playing) pause();
   Object.assign(meet, { on: true, muted: false, t: 0, held: 0 });
+  laptop.classList.add("cam-on");
   syncMic();
   const w = wins.meet, fresh = !w.classList.contains("open");
   w.classList.add("open"); w.classList.remove("min");
@@ -2269,6 +2364,7 @@ function startMeet() {
 function endMeet() {
   if (!meet.on) return;
   meet.on = false;
+  laptop.classList.remove("cam-on");
   wins.meet.classList.remove("open", "min");
   if (activeWin === wins.meet) activeWin = null;
   syncTaskbar(); render();
@@ -2415,10 +2511,36 @@ document.querySelectorAll("[data-try]").forEach(b => b.addEventListener("click",
 let attracted = false;
 new IntersectionObserver(([en]) => {
   demoVisible = en.isIntersecting;
-  if (demoVisible && !attracted) { attracted = true; setTimeout(() => { if (!interacted) incoming(); }, 4000); }
+  if (demoVisible && !attracted) { attracted = true; boot(); setTimeout(() => { if (!interacted) incoming(); }, 5200); }
 }, { threshold: 0.45 }).observe(demo);
 
+// Laptop menyala: logo Windows, lalu island bangun dari titik kecil dan memantul ke ukurannya.
+let booted = false;
+function boot(fast) {
+  if (booted) return;
+  booted = true;
+  const b = $("boot");
+  const wake = () => { b.classList.add("off"); setTimeout(() => b.classList.add("gone"), 800); shape.from(36, 10, 5); iwrap.classList.remove("sleep"); render(); };
+  if (fast || reduced) return wake();
+  setTimeout(wake, 1500);
+}
+
 // ================= Scroll =================
+// Laptop sedikit miring mengikuti kursor (hanya saat kursor di luar layar, supaya klik & seret tetap tepat).
+const tilt = { x: 0, y: 0, tx: 0, ty: 0, raf: 0 };
+$("coba").addEventListener("pointermove", e => {
+  if (e.pointerType !== "mouse") return;
+  const r = laptop.getBoundingClientRect(), inScreen = !!e.target.closest("#screen");
+  tilt.tx = inScreen ? 0 : clamp((e.clientY - (r.top + r.height / 2)) / r.height, -1, 1) * -3;
+  tilt.ty = inScreen ? 0 : clamp((e.clientX - (r.left + r.width / 2)) / r.width, -1, 1) * 4;
+  if (!tilt.raf) tilt.raf = requestAnimationFrame(tiltStep);
+});
+$("coba").addEventListener("pointerleave", () => { tilt.tx = tilt.ty = 0; if (!tilt.raf) tilt.raf = requestAnimationFrame(tiltStep); });
+function tiltStep() {
+  tilt.x += (tilt.tx - tilt.x) * .12; tilt.y += (tilt.ty - tilt.y) * .12;
+  onScroll();
+  tilt.raf = Math.abs(tilt.tx - tilt.x) + Math.abs(tilt.ty - tilt.y) > .01 ? requestAnimationFrame(tiltStep) : 0;
+}
 const nav = $("nav");
 let ticking = false;
 function onScroll() {
@@ -2429,7 +2551,7 @@ function onScroll() {
   // Masuk: laptop miring & kecil, lalu tegak penuh.
   const enter = clamp((vh - r.top) / (vh * 0.7), 0, 1);
   const e = 1 - Math.pow(1 - enter, 3);
-  laptop.style.transform = `perspective(1600px) translateY(${(1 - e) * 60}px) rotateX(${(1 - e) * 26}deg) scale(${0.86 + 0.14 * e})`;
+  laptop.style.transform = `perspective(1600px) translateY(${(1 - e) * 60}px) rotateX(${(1 - e) * 26 + tilt.x}deg) rotateY(${tilt.y}deg) scale(${0.86 + 0.14 * e})`;
   laptop.style.opacity = 0.3 + 0.7 * e;
 
   // Tandai link header yang sedang dilihat
@@ -2492,11 +2614,45 @@ function finishIntro(fast) {
     document.body.classList.add("ready");
     setVariant(variant);
   };
-  if (fast) return reveal();
+  if (fast) { reveal(); return heroCycle(); }
+  // Layar hitam mengecil tepat menjadi island hero, dan mata besar menyusut ke mata robot di dalamnya.
+  const hr = $("hIsland").getBoundingClientRect(), eyes = intro.querySelector(".intro-eyes"), er = eyes.getBoundingClientRect(), he = $("hEyes").getBoundingClientRect();
+  intro.style.setProperty("--clip", `inset(${hr.top}px ${innerWidth - hr.right}px ${innerHeight - hr.bottom}px ${hr.left}px round ${hr.height / 2}px)`);
+  intro.style.setProperty("--ex", (he.left + he.width / 2 - (er.left + er.width / 2)) + "px");
+  intro.style.setProperty("--ey", (he.top + he.height / 2 - (er.top + er.height / 2)) + "px");
+  intro.style.setProperty("--es", (he.height / er.height).toFixed(3));
   intro.classList.add("close");
   setTimeout(reveal, 900);
+  setTimeout(heroCycle, 1400);
 }
-if (reduced || deepLink) finishIntro(true);
+
+// Island hero memamerkan fitur bergantian, seperti island sungguhan di atas layar.
+let heroT = 0, heroI = 0;
+const HERO = [
+  { k: "robot", w: 150, h: 38, cap: "Saat sepi, sepasang mata menemani", ms: 2600 },
+  { k: "music", w: 268, h: 40, cap: "Musik & lirik yang sedang diputar", ms: 3000 },
+  { k: "notif", w: 352, h: 52, cap: "Notifikasi ringkas", ms: 3000 },
+  { k: "pray", w: 260, h: 40, cap: "Hitung mundur sholat & adzan", ms: 3000 },
+  { k: "meet", w: 330, h: 40, cap: "Rapat dari kalender, tinggal Gabung", ms: 3000 },
+  { k: "clock", w: 210, h: 34, mic: true, cap: "Mode rapat: klik gelembung mic untuk bisu", ms: 3400 }
+];
+function heroShow(i) {
+  const st = HERO[i], hi = $("hIsland");
+  hi.style.width = st.w + "px"; hi.style.height = st.h + "px"; hi.style.borderRadius = st.h / 2 + "px";
+  hi.querySelectorAll(".hp").forEach(p => p.classList.toggle("on", p.dataset.h === st.k));
+  $("hWrap").classList.toggle("mic", !!st.mic);
+  $("hMic").classList.remove("muted"); $("hMicL").textContent = "Mic";
+  if (st.mic) setTimeout(() => { $("hMic").classList.add("muted"); $("hMicL").textContent = "Bisu"; }, 1700);
+  $("hCap").textContent = st.cap;
+}
+function heroCycle() {
+  clearTimeout(heroT);
+  if (reduced) return;
+  heroT = setTimeout(function next() { heroI = (heroI + 1) % HERO.length; heroShow(heroI); heroT = setTimeout(next, HERO[heroI].ms); }, HERO[0].ms);
+}
+$("hWrap").addEventListener("click", () => $("coba").scrollIntoView({ behavior: "smooth" }));
+setInterval(() => { $("hClock").textContent = $("clockT").textContent; }, 1000);
+if (reduced || deepLink) { finishIntro(true); if (location.hash === "#coba") boot(true); }
 else {
   intro.addEventListener("click", () => finishIntro(false));
   setTimeout(() => finishIntro(false), 2700);
