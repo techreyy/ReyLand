@@ -525,17 +525,43 @@ button.mood.on b { border-color: rgba(124, 247, 255, 0.45); }
 .robot-big .eyes i { transition: transform .35s var(--ease), opacity .35s; }
 .robot-big .sweat { position: absolute; left: calc(50% + 22px); top: 7px; width: 5px; height: 7px; border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%; background: var(--cyan); opacity: 0; }
 .robot-big.m-nod .eyes { animation: nod .55s ease-in-out infinite alternate; }
-.robot-big.m-sleep .eyes, .robot-big.m-tired .eyes, .robot-big.m-hot .eyes, .robot-big.m-happy .eyes { animation: none; }
+.robot-big.m-sleep .eyes, .robot-big.m-tired .eyes, .robot-big.m-hot .eyes, .robot-big.m-happy .eyes, .robot-big.m-full .eyes { animation: none; }
 .robot-big.m-sleep .eyes i { transform: scaleY(.14); opacity: .5; animation: none; }
 .robot-big.m-tired .eyes i { transform: scaleY(.42); opacity: .55; animation: none; }
 .robot-big.m-sleep .robot::before, .robot-big.m-sleep .robot::after, .robot-big.m-tired .robot::before, .robot-big.m-tired .robot::after { opacity: .25; animation: none; }
-.robot-big.m-hot .eyes i, .robot-big.m-happy .eyes i { background: none; box-shadow: none; animation: none; position: relative; }
-.robot-big.m-hot .eyes i::before, .robot-big.m-happy .eyes i::before { content: ""; position: absolute; left: 0; top: 4px; width: 8px; height: 8px; border: 3px solid var(--cyan); filter: drop-shadow(0 0 4px var(--cyan)); }
+.robot-big.m-hot .eyes i, .robot-big.m-happy .eyes i, .robot-big.m-full .eyes i, .robot-big.m-celebrate .eyes i { background: none; box-shadow: none; animation: none; position: relative; }
+.robot-big.m-hot .eyes i::before, .robot-big.m-happy .eyes i::before, .robot-big.m-full .eyes i::before, .robot-big.m-celebrate .eyes i::before { content: ""; position: absolute; left: 0; top: 4px; width: 8px; height: 8px; border: 3px solid var(--cyan); filter: drop-shadow(0 0 4px var(--cyan)); }
 .robot-big.m-hot .eyes i:first-child::before { border-width: 3px 3px 0 0; transform: rotate(45deg); left: -2px; }
 .robot-big.m-hot .eyes i:last-child::before { border-width: 0 0 3px 3px; transform: rotate(45deg); left: 4px; }
-.robot-big.m-happy .eyes i::before { border-width: 3px 0 0 3px; transform: rotate(45deg); left: 1px; top: 6px; }
+.robot-big.m-happy .eyes i::before, .robot-big.m-full .eyes i::before, .robot-big.m-celebrate .eyes i::before { border-width: 3px 0 0 3px; transform: rotate(45deg); left: 1px; top: 6px; }
 .robot-big.m-happy .eyes { animation: hop .36s ease-out 3; }
 .robot-big.m-hot .sweat { animation: drip 1.1s ease-in infinite; }
+/* Ekspresi baru: marah merah + charger, penuh (hijau berkilau), kamera menyala, merayakan */
+.robot-big .prop, .robot-big .spark, .robot-big .pdot { position: absolute; opacity: 0; transition: opacity .3s; pointer-events: none; }
+.robot-big .prop { left: calc(50% + 27px); top: 50%; width: 22px; height: 19px; margin-top: -8px; color: var(--cyan); overflow: visible; }
+.robot-big .pdot { right: 10px; top: 50%; width: 5px; height: 5px; margin-top: -2px; border-radius: 50%; background: #34c759; box-shadow: 0 0 6px #34c759; }
+.robot-big .spark { left: calc(50% + 21px); top: 2px; font-size: 8px; line-height: 1; color: #fff; }
+.robot-big.m-angry .island { --cyan: #ff453a; }
+.robot-big.m-full .island { --cyan: #5cf08a; }
+.robot-big.m-angry .robot::before, .robot-big.m-angry .robot::after, .robot-big.m-angry .robot .bottom { filter: hue-rotate(170deg) saturate(1.8); }
+.robot-big.m-full .robot::before, .robot-big.m-full .robot::after, .robot-big.m-full .robot .bottom { filter: hue-rotate(-50deg); }
+.robot-big.m-angry .eyes { animation: shake 1.8s ease-in-out infinite; }
+.robot-big.m-angry .eyes i { animation: none; clip-path: polygon(0 18%, 100% 46%, 100% 100%, 0 100%); }
+.robot-big.m-angry .eyes i:last-child { clip-path: polygon(0 46%, 100% 18%, 100% 100%, 0 100%); }
+.robot-big.m-angry .p-plug { opacity: 1; transform-origin: 25% 60%; animation: wag .26s ease-in-out infinite alternate; }
+.robot-big.m-camera .p-cam, .robot-big.m-camera .pdot { opacity: 1; }
+.robot-big.m-camera .p-cam { animation: bob-s 1.3s ease-in-out infinite alternate; }
+.robot-big.m-camera .rec { animation: blink-rec 1.2s steps(1) infinite; }
+.robot-big.m-full .spark, .robot-big.m-celebrate .spark { opacity: 1; animation: twinkle .5s ease-in-out infinite alternate; }
+.robot-big.m-full .eyes { animation: hop .36s ease-out 3; }
+.robot-big.m-celebrate .eyes { animation: hop .32s ease-out infinite; }
+.robot-big.m-celebrate .island { animation: rainbow 1.4s linear infinite; }
+@keyframes shake { 0%, 70%, 100% { transform: translateX(0); } 74% { transform: translateX(-2px); } 78% { transform: translateX(2px); } 82% { transform: translateX(-1.5px); } 86% { transform: translateX(1.5px); } }
+@keyframes wag { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+@keyframes bob-s { from { transform: translateY(1px); } to { transform: translateY(-1px); } }
+@keyframes blink-rec { 50% { opacity: 0; } }
+@keyframes twinkle { from { opacity: .3; transform: scale(.6); } to { opacity: 1; transform: scale(1.1); } }
+@keyframes rainbow { to { filter: hue-rotate(360deg); } }
 @keyframes nod { to { transform: translateY(2px); } }
 @keyframes hop { 50% { transform: translateY(-3px); } }
 @keyframes drip { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(7px); } }
@@ -1207,7 +1233,7 @@ footer a:hover { color: #fff; }
       <article class="feat wide reveal" style="--d:0">
         <div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <h3>Musik dengan lirik sinkron</h3>
-        <p>Lagu yang sedang diputar tampil ringkas di atas layar. Arahkan kursor untuk melihat lirik yang bergulir mengikuti lagu, plus kontrol putar, jeda, dan ganti lagu. Bekerja dengan Spotify, YouTube di browser, dan pemutar lain yang mendukung kontrol media Windows.</p>
+        <p>Lagu yang sedang diputar tampil ringkas di atas layar. Arahkan kursor untuk melihat lirik yang bergulir mengikuti lagu, plus kontrol putar, jeda, dan ganti lagu. Klik baris lirik atau geser progress untuk lompat ke detik mana pun, atur volume langsung di panel, dan pindah speaker ⇄ headphone sekali klik. Bekerja dengan Spotify, YouTube di browser, dan pemutar lain yang mendukung kontrol media Windows.</p>
         <button class="try-it" data-try="music">Lihat di demo ↑</button>
       </article>
       <article class="feat reveal" style="--d:1">
@@ -1219,7 +1245,7 @@ footer a:hover { color: #fff; }
       <article class="feat reveal" style="--d:0">
         <div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></svg></div>
         <h3>Shelf file</h3>
-        <p>Seret file ke island untuk disimpan sementara, lalu seret keluar ke aplikasi lain kapan saja.</p>
+        <p>Seret file ke island untuk disimpan sementara, lalu seret keluar ke aplikasi lain, satu per satu atau banyak sekaligus. Ada juga riwayat clipboard (opsional).</p>
         <button class="try-it" data-try="shelf">Lihat di demo ↑</button>
       </article>
       <article class="feat reveal" style="--d:1">
@@ -1231,13 +1257,13 @@ footer a:hover { color: #fff; }
       <article class="feat reveal" style="--d:2">
         <div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg></div>
         <h3>Notifikasi ringkas</h3>
-        <p>Pesan masuk muncul sebagai pil kecil yang lebarnya menyesuaikan isi chat, lengkap dengan foto profil pengirim WhatsApp.</p>
+        <p>Pesan masuk muncul sebagai pil kecil yang lebarnya menyesuaikan isi chat, lengkap dengan foto profil pengirim WhatsApp. Klik untuk langsung membuka chat-nya.</p>
         <button class="try-it" data-try="notif">Lihat di demo ↑</button>
       </article>
       <article class="feat wide reveal" style="--d:0">
         <div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 12.6A6.8 6.8 0 1 1 15.5 3.5Z"/></svg></div>
         <h3>Hari ini: jadwal sholat &amp; libur nasional</h3>
-        <p>Lima waktu sholat sesuai kriteria Kemenag, dihitung langsung di laptopmu tanpa internet, lengkap dengan hitung mundur dan pengingat saat waktunya masuk. Ada juga libur nasional dan cuti bersama berikutnya, plus cuaca kalau kamu mau. Tersedia 46 kota, dari Banda Aceh sampai Merauke.</p>
+        <p>Lima waktu sholat sesuai kriteria Kemenag, dihitung langsung di laptopmu tanpa internet, lengkap dengan hitung mundur dan pengingat saat waktunya masuk. Ada juga libur nasional dan cuti bersama berikutnya, plus cuaca kalau kamu mau. Tersedia 46 kota, dari Banda Aceh sampai Merauke. Sambungkan Google Calendar, Outlook, atau iCloud lewat tautan iCal supaya rapat dan kuliahmu ikut diingatkan.</p>
         <button class="try-it" data-try="today">Lihat di demo ↑</button>
       </article>
       <article class="feat reveal" style="--d:1">
@@ -1246,10 +1272,25 @@ footer a:hover { color: #fff; }
         <p>Island biru gelap seperti kaca, pendarnya ikut warna cover lagu yang diputar. Suka yang polos? Tetap ada hitam klasik.</p>
         <button class="try-it" data-try="aurora">Nyalakan di demo ↑</button>
       </article>
+      <article class="feat reveal" style="--d:0">
+        <div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div>
+        <h3>Live activity unduhan</h3>
+        <p>Unduhan Chrome, Edge, dan Firefox tampil di island: nama file, ukuran, dan kecepatannya. Selesai? Klik untuk langsung membuka foldernya.</p>
+      </article>
+      <article class="feat reveal" style="--d:1">
+        <div class="icon"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10.5 21 8v8l-5-2.5"/></svg></div>
+        <h3>Titik kamera &amp; mikrofon</h3>
+        <p>Seperti Dynamic Island asli: titik hijau saat kamera menyala, oranye saat hanya mikrofon. Robotnya juga ikut memegang kamera.</p>
+      </article>
+      <article class="feat reveal" style="--d:2">
+        <div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4"/></svg></div>
+        <h3>Pembaruan otomatis</h3>
+        <p>Ada versi baru? Klik "Perbarui" di island, tray, atau Pengaturan. ReyLand mengunduh, memasang, dan membuka ulang dirinya sendiri.</p>
+      </article>
       <article class="feat full reveal" style="--d:0">
         <div class="icon"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M8 12h8M12 8v8"/></svg></div>
         <h3>Tahu diri, gampang diatur</h3>
-        <p>Sembunyi otomatis saat game atau video layar penuh, dan minggir sebentar kalau menutupi tombol aplikasi lain. Scroll di atas island untuk mengatur volume, dan klik dua kali untuk play/pause. Posisinya tetap di tengah atas, jadi selalu ada di tempat yang sama. Settings ada di tombol gear panel island.</p>
+        <p>Sembunyi otomatis saat game atau video layar penuh, dan minggir sebentar kalau menutupi tombol aplikasi lain. Scroll di atas island untuk mengatur volume, dan klik dua kali untuk play/pause. Posisinya tetap di tengah atas dan ukurannya bisa dipilih (Auto, 75% sampai 130%), di monitor mana pun. Pengaturannya rapi per kategori seperti di Mac, dibuka dari tombol gear panel island.</p>
       </article>
     </div>
   </div>
@@ -1258,7 +1299,10 @@ footer a:hover { color: #fff; }
 <section id="robot" class="band">
   <div class="wrap robot-sec">
     <div class="robot-big reveal" id="robotBig">
-      <div class="island"><div class="page robot on"><div class="bottom"></div><div class="eyes" id="bigEyes"><i></i><i></i></div><span class="sweat"></span></div></div>
+      <div class="island"><div class="page robot on"><div class="bottom"></div><div class="eyes" id="bigEyes"><i></i><i></i></div><span class="sweat"></span><span class="spark">✦</span>
+        <svg class="prop p-cam" viewBox="0 0 26 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="16" height="11" rx="2.5"/><path d="M10.5 5l1.1-2.2h4.8L17.5 5"/><circle cx="14" cy="10.5" r="3.4"/><circle class="rec" cx="19.5" cy="7.4" r=".9" fill="#ff453a" stroke="none"/><circle cx="5" cy="15" r="3.2" fill="currentColor" stroke="none"/></svg>
+        <svg class="prop p-plug" viewBox="0 0 26 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5V1.5M16 5V1.5"/><rect x="8.5" y="5" width="10" height="9" rx="2.5"/><path d="M14.6 6.6l-2.4 3.4H14l-.8 2.6 2.6-3.6H14z" fill="currentColor" stroke="none"/><path d="M13.5 14q0 5 7 5"/><circle cx="5.5" cy="10" r="3.2" fill="currentColor" stroke="none"/></svg>
+        <span class="pdot"></span></div></div>
       <small id="moodCap">Gerakkan kursor, matanya mengikuti 👀</small>
     </div>
     <div class="reveal" style="--d:1">
@@ -1269,9 +1313,12 @@ footer a:hover { color: #fff; }
         <button class="mood on" data-mood="look"><b>👀</b><p><strong>Melirik dan berkedip</strong> ke kiri dan kanan, seperti sedang memperhatikan.</p></button>
         <button class="mood" data-mood="nod"><b>🎵</b><p><strong>Mengangguk</strong> mengikuti irama saat musik berjalan.</p></button>
         <button class="mood" data-mood="sleep"><b>😴</b><p><strong>Mengantuk</strong> kalau lama dibiarkan, apalagi kalau sudah malam.</p></button>
-        <button class="mood" data-mood="tired"><b>🔋</b><p><strong>Lemas</strong> saat baterai tinggal sedikit dan belum dicas.</p></button>
-        <button class="mood" data-mood="hot"><b>🥵</b><p><strong>Kepanasan dan berkeringat</strong> saat CPU bekerja keras.</p></button>
+        <button class="mood" data-mood="angry"><b>😠</b><p><strong>Marah sambil mengacungkan charger</strong>, matanya merah saat baterai tinggal 10–20%. Di bawah 10% matanya berkedip merah.</p></button>
         <button class="mood" data-mood="happy"><b>🔌</b><p><strong>Senang</strong> saat charger dicolok, dan melompat saat kamu kembali.</p></button>
+        <button class="mood" data-mood="full"><b>🔋</b><p><strong>Tersenyum hijau berkilau</strong> saat baterai penuh.</p></button>
+        <button class="mood" data-mood="camera"><b>📷</b><p><strong>Memegang kamera</strong> saat webcam menyala, dengan titik hijau seperti Dynamic Island asli (oranye untuk mikrofon).</p></button>
+        <button class="mood" data-mood="hot"><b>🥵</b><p><strong>Kepanasan dan berkeringat</strong> saat CPU bekerja keras.</p></button>
+        <button class="mood" data-mood="celebrate"><b>🎉</b><p><strong>Merayakan</strong> saat timer selesai, dan kaget dulu sebelum notifikasi muncul.</p></button>
       </div>
     </div>
   </div>
@@ -1287,7 +1334,7 @@ footer a:hover { color: #fff; }
     <div class="points">
       <div class="point reveal" style="--d:0"><h4>Tanpa akun</h4><p>Langsung pakai, tidak perlu daftar atau login.</p></div>
       <div class="point reveal" style="--d:1"><h4>Data lokal</h4><p>Pengaturan, file shelf, dan jadwal sholat dihitung serta disimpan di komputermu.</p></div>
-      <div class="point reveal" style="--d:2"><h4>Tak ikut terekam</h4><p>Island tidak muncul di screenshot dan rekaman layar.</p></div>
+      <div class="point reveal" style="--d:2"><h4>Kamu yang pilih</h4><p>Island tidak ikut terekam di screenshot dan rekaman layar, kecuali kamu menyalakannya di Pengaturan.</p></div>
       <div class="point reveal" style="--d:3"><h4>Tajam di semua skala</h4><p>Menyesuaikan skala layar (DPI) secara otomatis, dari 100% sampai 200%.</p></div>
     </div>
   </div>
@@ -1388,7 +1435,10 @@ footer a:hover { color: #fff; }
       <details><summary>Di mana hasil screenshot dan rekaman disimpan?</summary><p>Screenshot di folder Gambar\Screenshots dan sekaligus disalin ke clipboard. Rekaman di folder Video\Captures dalam format MP4. Secara bawaan island tidak ikut tertangkap; kalau ingin Dynamic/Notch-nya terlihat di hasil screenshot dan video, nyalakan di Pengaturan › Tangkap Layar.</p></details>
       <details><summary>Bisa memindahkan banyak file dari shelf sekaligus?</summary><p>Bisa. Klik beberapa tile di shelf (atau tombol "Pilih semua"), lalu seret salah satu tile yang terpilih: semua file terpilih ikut terbawa ke folder atau aplikasi tujuan.</p></details>
       <details><summary>Bagaimana cara menjalankan saat Windows menyala?</summary><p>Arahkan kursor ke island lalu klik tombol roda gigi (atau buka dari ikon tray) → Pengaturan › Umum, lalu nyalakan "Jalankan saat Windows mulai".</p></details>
-      <details><summary>Bagaimana tahu ada versi baru?</summary><p>ReyLand memeriksa GitHub Releases sekitar dua kali sehari. Kalau ada versi baru, island memberi tahu dan menu "Unduh ReyLand" muncul di ikon tray. Bisa dimatikan di Pengaturan › Umum.</p></details>
+      <details><summary>Bagaimana cara memperbarui ReyLand?</summary><p>ReyLand memeriksa GitHub Releases sekitar dua kali sehari. Kalau ada versi baru, klik notifikasinya di island, menu "Perbarui" di ikon tray, atau tombol Perbarui di Pengaturan › Umum. ReyLand mengunduh versi baru dari GitHub, memeriksanya, lalu membuka ulang dirinya sendiri. Pemeriksaan bisa dimatikan di Pengaturan › Umum.</p></details>
+      <details><summary>Bagaimana menyambungkan Google Calendar?</summary><p>Di Google Calendar (web), buka Setelan → pilih kalendermu → salin "Alamat rahasia dalam format iCal". Tempel di Pengaturan › Hari ini › Kalender. Acara hari ini masuk ke agenda dan diingatkan di island. Outlook.com dan iCloud juga punya tautan iCal yang sama.</p></details>
+      <details><summary>Unduhan apa saja yang tampil di island?</summary><p>Unduhan Chrome, Edge, dan Firefox ke folder Downloads. Island menampilkan nama file, ukuran yang sudah terunduh, dan kecepatannya; saat selesai, klik untuk membuka foldernya. Bisa dimatikan di Pengaturan › Umum.</p></details>
+      <details><summary>Titik hijau atau oranye di island itu apa?</summary><p>Sama seperti di iPhone: hijau berarti ada aplikasi yang sedang memakai kamera, oranye berarti hanya mikrofon. Saat kamera baru menyala, robot juga muncul sebentar sambil memegang kamera.</p></details>
       <details><summary>Riwayat clipboard aman?</summary><p>Fitur ini mati secara bawaan. Kalau dinyalakan, 10 teks/gambar terakhir hanya disimpan di memori (hilang saat ReyLand ditutup) dan isi yang ditandai rahasia oleh pengelola kata sandi tidak dicatat.</p></details>
     </div>
   </div>
@@ -2102,7 +2152,7 @@ window.addEventListener("resize", () => { setVariant(variant); onScroll(); });
 
 // Mata robot besar mengikuti kursor; klik ekspresi di daftar untuk mencobanya
 const bigEyes = $("bigEyes"), robotBig = $("robotBig");
-const MOOD_CAP = { look: "Gerakkan kursor, matanya mengikuti 👀", nod: "Lagi dengerin musik 🎵", sleep: "Zzz… 😴", tired: "Baterai 15%, colok charger dong 🔋", hot: "CPU 95%, panas! 🥵", happy: "Charger dicolok, yeay 🔌" };
+const MOOD_CAP = { look: "Gerakkan kursor, matanya mengikuti 👀", nod: "Lagi dengerin musik 🎵", sleep: "Zzz… 😴", angry: "Baterai 15%! Colok charger sekarang 😠", hot: "CPU 95%, panas! 🥵", happy: "Charger dicolok, yeay 🔌", full: "Baterai 100%, mantap ✦", camera: "Kamera menyala, titik hijau 📷", celebrate: "Timer selesai, hore! 🎉" };
 document.querySelectorAll("#moods [data-mood]").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll("#moods .mood").forEach(x => x.classList.toggle("on", x === b));
   robotBig.className = robotBig.className.replace(/\bm-\w+/g, "").trim();
