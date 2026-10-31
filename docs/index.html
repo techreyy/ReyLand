@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='14' width='60' height='36' rx='18' fill='%2304060c'/%3E%3Crect x='20' y='22' width='9' height='20' rx='4.5' fill='%237CF7FF'/%3E%3Crect x='35' y='22' width='9' height='20' rx='4.5' fill='%237CF7FF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   /* Tema gelap: hitam kebiruan, aksen cyan-biru seperti cahaya mata robot */
@@ -1094,6 +1094,96 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
   .step p { font-size: 15px; }
 }
 
+
+/* ================= Konsep: island di atas halaman adalah pemandunya ================= */
+:root { --mono: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+.sky { animation: none; background: radial-gradient(760px 420px at 50% -180px, rgba(124, 247, 255, 0.13), transparent 70%); }
+h2 .hl, .grad, .glow { background: none; -webkit-text-fill-color: currentColor; color: var(--cyan); animation: none; }
+.eyebrow { display: inline-block; padding: 0; border: 0; background: none; border-radius: 0; font: 500 12px var(--mono); letter-spacing: .14em; text-transform: lowercase; color: var(--cyan); }
+.btn-primary, .nav-cta { background: var(--cyan); color: #00131a; box-shadow: 0 0 0 1px rgba(124, 247, 255, 0.6), 0 10px 40px rgba(124, 247, 255, 0.22); }
+.btn-primary::after { display: none; }
+.btn-primary:hover { box-shadow: 0 0 0 1px #fff, 0 12px 50px rgba(124, 247, 255, 0.35); }
+section.band { background: none; }
+.download { background: #000; border-color: rgba(255, 255, 255, 0.09); box-shadow: 0 0 0 1px rgba(124, 247, 255, 0.06) inset, 0 40px 120px rgba(0, 0, 0, 0.6); }
+.robot-big { background: #000; }
+
+/* Header: brand kiri, island asli di tengah, tombol kanan */
+.top { position: fixed; inset: 0 0 auto; z-index: 40; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; pointer-events: none; }
+.top > * { pointer-events: auto; }
+.top::before { content: ""; position: absolute; inset: 0 0 -24px; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(4, 6, 12, 0.92) 40%, rgba(4, 6, 12, 0)); opacity: 0; transition: opacity .3s; }
+.top.scrolled::before { opacity: 1; }
+.t-right { display: flex; gap: 10px; align-items: center; }
+.t-isl { position: absolute; left: 50%; top: 12px; translate: -50% 0; }
+.top .h-wrap { transform: none; transform-origin: 50% 0; cursor: default; transition: transform .6s var(--spring), translate .7s var(--spring); }
+body.in-story .top .h-wrap { transform: scale(1.3); }
+.top .hisland { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 60px rgba(124, 247, 255, 0.10); }
+.hp:not(.on) { pointer-events: none; }
+.top .eyes i { transition: transform .3s var(--ease), opacity .3s; }
+.top.m-sleep .eyes, .top.m-wow .eyes, .top.m-happy .eyes { animation: none; }
+.top.m-sleep .eyes i { transform: scaleY(.14); opacity: .5; animation: none; }
+.top.m-sleep .robot::before, .top.m-sleep .robot::after { opacity: .25; animation: none; }
+.top.m-wow .eyes i { transform: scale(1.3); animation: none; }
+.top.m-happy .eyes i { background: none; box-shadow: none; animation: none; position: relative; }
+.top.m-happy .eyes i::before { content: ""; position: absolute; left: 1px; top: 6px; width: 8px; height: 8px; border: 3px solid var(--cyan); border-width: 3px 0 0 3px; transform: rotate(45deg); filter: drop-shadow(0 0 4px var(--cyan)); }
+.top.m-hop .eyes { animation: hop .36s ease-out 2; }
+.kopi-pill { gap: 9px; padding: 0 16px 0 12px; color: #fff; }
+.kopi-pill .k-cup { font-size: 17px; }
+.kopi-pill span:last-child { margin-left: auto; color: #8e8e93; font-size: 12px; font-weight: 500; }
+.hp .lv-btn { text-decoration: none; display: grid; place-items: center; line-height: 1; }
+.dl-step b { background: var(--cyan); }
+@keyframes nudge { 50% { transform: translateY(-3px); } }
+.menu-pg { gap: 2px; padding: 0 7px; }
+.menu-pg a { flex: 1; display: grid; place-items: center; padding: 5px 0 6px; border-radius: 18px; font-size: 12.5px; font-weight: 600; line-height: 1.25; color: #d4dae8; transition: background .2s, color .2s; }
+.menu-pg a:hover { background: #1c1c1e; color: #fff; }
+.menu-pg a i { font: 500 9px var(--mono); font-style: normal; color: #6b7488; }
+.hint-up { position: fixed; top: 60px; left: 50%; translate: -50% 0; z-index: 39; display: flex; align-items: center; gap: 7px; white-space: nowrap; font: 400 11.5px var(--mono); color: #7d89a6; transition: opacity .4s; pointer-events: none; }
+.hint-up svg { width: 13px; height: 13px; fill: none; stroke: var(--cyan); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; animation: nudge 1.6s ease-in-out infinite; }
+.top.scrolled ~ .hint-up, body.intro-on .hint-up { opacity: 0; }
+.tether { position: fixed; left: 50%; top: 96px; width: 1px; height: 10vh; z-index: 1; pointer-events: none; background: linear-gradient(var(--cyan), transparent); opacity: 0; transition: opacity .5s; }
+body.in-story .tether { opacity: .45; }
+
+/* Hero: tipografi besar, sapaan & jadwal sholat sungguhan */
+.hero { min-height: 100svh; display: grid; align-items: center; padding: 120px 0 70px; position: relative; isolation: isolate; overflow-x: clip; }
+.hero::before { content: ""; position: absolute; left: 50%; top: 0; width: min(1000px, 130vw); height: 75vh; translate: -50% 0; z-index: -1; pointer-events: none; background: radial-gradient(45% 100% at 50% 0, rgba(124, 247, 255, 0.12), rgba(61, 139, 255, 0.04) 55%, transparent 80%); }
+.greet { font: 400 14px var(--mono); color: var(--muted); margin-bottom: 26px; }
+.greet b { color: #fff; font-weight: 500; }
+.hero h1 { font-size: clamp(46px, 9.4vw, 132px); line-height: .95; letter-spacing: -0.055em; max-width: 1150px; }
+.lit { color: var(--cyan); text-shadow: 0 0 50px rgba(124, 247, 255, 0.35); }
+.hero .lead { margin: 30px auto 36px; }
+.pray-line { margin-top: 34px; display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; padding: 6px 8px 6px 8px; border-radius: 999px; background: #000; border: 1px solid rgba(255, 255, 255, 0.09); font: 400 13px var(--mono); color: #8e8e93; }
+.pray-line .pl-ic { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: rgba(48, 209, 88, 0.15); }
+.pray-line .pl-ic svg { width: 14px; height: 14px; fill: #30d158; }
+.pray-line b { color: #fff; font-weight: 500; }
+.pray-line #pLeft { color: #30d158; padding-right: 8px; }
+.pray-line select { appearance: none; -webkit-appearance: none; background: #1c1c1e; color: #fff; border: 0; border-radius: 999px; padding: 5px 12px; font: inherit; cursor: pointer; }
+.pray-line select option { background: #111; }
+.hero .meta { font: 400 11.5px var(--mono); color: #5d6883; }
+
+/* Cerita: teks besar, island-nya di atas */
+.story { padding: 140px 0 0; }
+.story-intro { text-align: center; max-width: 780px; margin: 0 auto; }
+.story-intro h2 { font-size: clamp(34px, 5.6vw, 64px); line-height: 1.02; letter-spacing: -0.045em; }
+.story-intro h2 em { font-style: normal; color: var(--cyan); }
+.story-intro .sub { margin-inline: auto; }
+.story-steps { padding: 4vh 0 12vh; }
+.step { min-height: 92vh; align-items: center; text-align: center; transform: translateY(18px); opacity: .12; }
+.step.on { opacity: 1; transform: none; }
+.step-n { font: 500 12px var(--mono); letter-spacing: .12em; }
+.step h3 { font-size: clamp(34px, 6.4vw, 80px); line-height: 1; letter-spacing: -0.05em; max-width: 960px; margin-bottom: 18px; }
+.step p { font-size: 18px; max-width: 560px; margin-inline: auto; }
+.maker { margin-top: 18px; font-size: 13.5px; color: var(--muted); }
+.maker a { color: var(--cyan); }
+.maker a:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .top .brand, .t-right { display: none; }
+  body.in-story .top .h-wrap { transform: none; }
+  .hint-up { font-size: 10.5px; }
+  .tether { top: 70px; height: 8vh; }
+  .step { min-height: 80vh; }
+  .step p { font-size: 16px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal, .rise { opacity: 1; transform: none; filter: none; }
@@ -1133,120 +1223,68 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
 
 <div class="sky"></div>
 
-<header class="nav" id="nav">
+<header class="top" id="nav">
   <a class="brand" href="#"><span class="brand-mark"><i></i><i></i></span>ReyLand</a>
-  <nav class="links">
-    <a href="#cerita">Island</a>
-    <a href="#coba">Coba</a>
-    <a href="#fitur">Fitur</a>
-    <a href="#robot">Robot</a>
-    <a href="#kopi">Dukung</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <div class="socials">
-    <a href="https://instagram.com/techreyy_" target="_blank" rel="noopener" aria-label="Instagram @techreyy_"><svg class="ic"><use href="#i-ig"/></svg></a>
-    <a href="https://www.tiktok.com/@techreyy_" target="_blank" rel="noopener" aria-label="TikTok @techreyy_"><svg class="ic"><use href="#i-tt"/></svg></a>
+  <div class="t-isl" id="tIsl">
+    <div class="h-wrap" id="hWrap">
+      <div class="hisland" id="hIsland">
+        <div class="hp on" data-h="robot"><div class="robot"><div class="bottom"></div><div class="eyes" id="hEyes"><i></i><i></i></div></div></div>
+        <div class="hp sp-music" data-h="music"><span class="cover-l"></span><span class="m-txt"><b>Langit Biru</b><small>Rey · Rey Music</small><em>Menyala pelan, warna biru</em></span><span class="eq"><i></i><i></i><i></i><i></i></span></div>
+        <div class="hp" data-h="otp"><span class="avatar sys" style="background:linear-gradient(135deg,#7cf7ff,#3d8bff)">🔐</span><span class="notif-txt"><b>Bank Rey</b><span>Kode OTP kamu 482 913</span></span><span class="otp-btn">Salin</span></div>
+        <div class="hp idle-pill" data-h="clock"><span class="mono" id="hClock">09.41</span><span class="bat">80%<i></i></span></div>
+        <div class="hp live-pill" data-h="pray" style="--lv:#30d158"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b class="lv-t" id="iPrayT">Maghrib 17.49</b><span class="lv-d" id="iPrayD">5 menit lagi</span></div>
+        <div class="hp live-pill" data-h="phone" style="--lv:#7cf7ff"><span class="lv-ic"><svg viewBox="0 0 22 22"><rect x="6.5" y="2.5" width="9" height="17" rx="2.2"/><path d="M10 16.5h2"/></svg></span><b class="lv-t">liburan.jpg → HP</b><span class="lv-d ph-pct">68%</span><i class="ph-bar"></i></div>
+        <div class="hp" data-h="remind"><div class="robot"><div class="bottom"></div><div class="eyes"><i></i><i></i></div></div></div>
+        <div class="hp live-pill" data-h="dl" style="--lv:#7cf7ff"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M11 3.5v10M6.8 9.6 11 13.8l4.2-4.2M4.5 18h13"/></svg></span><b class="lv-t">ReyLandSetup.exe</b><span class="lv-d">±4 MB</span><a class="lv-btn" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl>Unduh</a></div>
+        <a class="hp kopi-pill" data-h="kopi" href="https://saweria.co/techreyy" target="_blank" rel="noopener"><span class="k-cup">☕</span><b>Traktir kopi</b><span>Saweria</span></a>
+        <nav class="hp menu-pg" data-h="menu" aria-label="Navigasi"><a href="#cerita"><i>01</i>Cerita</a><a href="#coba"><i>02</i>Coba</a><a href="#robot"><i>03</i>Robot</a><a href="#unduh"><i>04</i>Unduh</a><a href="#faq"><i>05</i>FAQ</a></nav>
+      </div>
+      <div class="h-mic"><svg viewBox="0 0 22 22"><path d="M11,3.2 A2.6,2.6 0 0 1 13.6,5.8 V10.6 A2.6,2.6 0 0 1 8.4,10.6 V5.8 A2.6,2.6 0 0 1 11,3.2 Z M5.8,10.2 A5.2,5.2 0 0 0 16.2,10.2 M11,15.4 V18.6"/><path class="slash" d="M4,3.5 L18,17.5"/></svg><span>Mic</span></div>
+    </div>
   </div>
-  <a class="nav-kopi" href="https://saweria.co/techreyy" target="_blank" rel="noopener" aria-label="Traktir kopi lewat Saweria"><span class="bean">☕</span><span class="lbl">Traktir kopi</span></a>
-  <a class="nav-cta" href="#unduh">Unduh</a>
+  <div class="t-right">
+    <a class="nav-kopi" href="https://saweria.co/techreyy" target="_blank" rel="noopener" aria-label="Traktir kopi lewat Saweria"><span class="bean">☕</span><span class="lbl">Traktir kopi</span></a>
+    <a class="nav-cta" href="#unduh">Unduh</a>
+  </div>
 </header>
+<div class="hint-up" id="hintUp" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg>ini island-nya, ukuran asli. arahkan kursor ke sana</div>
+<div class="tether" aria-hidden="true"></div>
 
 <header class="hero">
-  <div class="hero-art" aria-hidden="true">
-    <div class="grid"></div>
-    <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
-    <div class="float f1"><span class="art"></span>Langit Biru <small>Rey</small></div>
-    <div class="float f2"><span class="dot">🌙</span>Ashar <span class="t-cy">14.53</span></div>
-    <div class="float f3"><span class="dot">⏱</span><span class="t-or">04:59</span></div>
-    <div class="float f4 eyes-only"><i></i><i></i></div>
-  </div>
   <div class="wrap">
-    <div class="h-stage">
-      <div class="h-wrap" id="hWrap" title="Coba langsung di laptop di bawah">
-        <div class="hisland" id="hIsland">
-          <div class="hp on" data-h="robot"><div class="robot"><div class="bottom"></div><div class="eyes" id="hEyes"><i></i><i></i></div></div></div>
-          <div class="hp" data-h="music"><span class="art"></span><span class="txt">Langit Biru · Rey</span><span class="eq" style="margin-left:auto"><i></i><i></i><i></i><i></i></span></div>
-          <div class="hp" data-h="notif"><span class="avatar">D</span><span class="notif-txt"><b>Dinda</b><span>Udah coba ReyLand belum? 👀</span></span><span class="notif-time">sekarang</span></div>
-          <div class="hp live-pill" data-h="pray" style="--lv:#30d158"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b class="lv-t">Ashar 15.02</b><span class="lv-d">8 menit lagi</span></div>
-          <div class="hp live-pill" data-h="meet" style="--lv:#0a84ff"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M3,7 H13.5 V15 H3 Z M13.5,9.6 L18.8,6.8 V15.2 L13.5,12.4"/></svg></span><b class="lv-t">Rapat tim mingguan</b><span class="lv-d">2 menit lagi</span><span class="lv-btn">Gabung</span></div>
-          <div class="hp idle-pill" data-h="clock"><span class="mono" id="hClock">10.42</span><span class="bat">80%<i></i></span></div>
-        </div>
-        <div class="h-mic" id="hMic"><svg viewBox="0 0 22 22"><path d="M11,3.2 A2.6,2.6 0 0 1 13.6,5.8 V10.6 A2.6,2.6 0 0 1 8.4,10.6 V5.8 A2.6,2.6 0 0 1 11,3.2 Z M5.8,10.2 A5.2,5.2 0 0 0 16.2,10.2 M11,15.4 V18.6"/><path class="slash" d="M4,3.5 L18,17.5"/></svg><span id="hMicL">Mic</span></div>
-        <span class="h-cap" id="hCap">Island ReyLand · langsung di atas layar</span>
-      </div>
-    </div>
-    <span class="pill-tag rise" style="--i:0"><b></b>Versi 1.2.0 sudah rilis · Windows 10 &amp; 11</span>
-    <h1 class="rise" style="--i:1">Bagian atas layarmu, <span class="glow">kini hidup.</span></h1>
-    <p class="lead rise" style="--i:2">ReyLand mengubah tepi atas layar Windows jadi island kecil: musik dan lirik, jadwal sholat dan adzan, mode rapat dengan tombol mic, timer, shelf file, kirim file ke HP, dan notifikasi. Muncul saat perlu, minggir saat tidak.</p>
+    <p class="greet rise" style="--i:0"><span id="greet">Halo</span>, sekarang <b class="mono" id="gClock">--.--</b></p>
+    <h1 class="rise" style="--i:1">Bagian atas layarmu, <span class="lit">kini hidup.</span></h1>
+    <p class="lead rise" style="--i:2">ReyLand mengubah tepi atas layar Windows jadi island kecil seperti yang ada di atas halaman ini: musik dan lirik, jadwal sholat, mode rapat, timer, shelf file, kirim file ke HP. Muncul saat perlu, minggir saat tidak.</p>
     <div class="cta rise" style="--i:3">
       <a class="btn btn-primary" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl><svg class="ic"><use href="#i-dl"/></svg><span>Unduh gratis</span></a>
       <a class="btn btn-ghost" href="#coba"><svg class="ic"><use href="#i-play"/></svg><span>Coba dulu di browser</span></a>
-      <a class="btn btn-ghost btn-kopi" href="https://saweria.co/techreyy" target="_blank" rel="noopener"><span class="bean">☕</span><span>Traktir kopi</span></a>
     </div>
-    <p class="meta rise" style="--i:4">Gratis · Installer ±4 MB · .NET 8 dipasang otomatis · Tanpa akun</p>
-    <a class="scroll-hint rise" style="--i:5" href="#coba"><span class="mouse"></span>Scroll untuk melihat</a>
+    <p class="pray-line rise" style="--i:4"><span class="pl-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b id="pNext">Maghrib 17.49</b><span>di</span><select id="pCity" aria-label="Pilih kota"></select><span id="pLeft">5 menit lagi</span></p>
+    <p class="meta rise" style="--i:5">dihitung di browser-mu dengan kriteria Kemenag, sama seperti di aplikasinya · v1.2.0 · Windows 10 &amp; 11 · gratis</p>
   </div>
 </header>
-
-
-<section class="stats" aria-label="ReyLand dalam angka">
-  <div class="wrap stat-row">
-    <div class="stat reveal" style="--d:0"><b data-count="4" data-pre="±" data-suf=" MB">±4 MB</b><span>Installer, .NET 8 ikut dipasang</span></div>
-    <div class="stat reveal" style="--d:1"><b data-count="14" data-suf=" fitur">14 fitur</b><span>Dalam satu island kecil</span></div>
-    <div class="stat reveal" style="--d:2"><b data-count="46" data-suf=" kota">46 kota</b><span>Jadwal sholat tanpa internet</span></div>
-    <div class="stat reveal" style="--d:3"><b>Rp0</b><span>Gratis selamanya, tanpa akun</span></div>
-  </div>
-</section>
-
-<div class="marquee" aria-hidden="true"><div class="track">
-  <span>Musik &amp; lirik</span><span>Jadwal sholat</span><span>Libur nasional</span><span>Timer &amp; Pomodoro</span><span>Shelf file</span><span>Tangkap layar</span><span>Rekam layar</span><span>Notifikasi</span><span>Mode rapat</span><span>Adzan</span><span>Sambung HP</span><span>Istirahat mata</span><span>Robot kecil</span><span>Tema Aurora</span>
-  <span>Musik &amp; lirik</span><span>Jadwal sholat</span><span>Libur nasional</span><span>Timer &amp; Pomodoro</span><span>Shelf file</span><span>Tangkap layar</span><span>Rekam layar</span><span>Notifikasi</span><span>Mode rapat</span><span>Adzan</span><span>Sambung HP</span><span>Istirahat mata</span><span>Robot kecil</span><span>Tema Aurora</span>
-</div></div>
-
 
 <!-- ================= Cerita: satu island, berubah sambil di-scroll ================= -->
 <section class="story" id="cerita">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Satu island</span>
-      <h2>Berubah sesuai <span class="hl">apa yang kamu lakukan.</span></h2>
-      <p class="sub">Scroll pelan-pelan. Island di layar berganti persis seperti di laptopmu nanti.</p>
+    <div class="story-intro reveal">
+      <span class="eyebrow">↑ lihat ke atas</span>
+      <h2>Island di atas halaman ini <em>adalah</em> ReyLand.</h2>
+      <p class="sub">Ukuran, bentuk, dan animasinya sama dengan aplikasinya. Scroll pelan-pelan, dia berubah mengikuti cerita.</p>
     </div>
-    <div class="story-grid">
-      <div class="st-stage">
-        <div class="st-screen" id="stScreen">
-          <div class="st-wall"><i></i><i></i><i></i></div>
-          <div class="st-win w1"></div><div class="st-win w2"></div>
-          <div class="st-bar"><span></span><span></span><span></span><span></span></div>
-          <div class="h-wrap st-wrap" id="stWrap">
-            <div class="hisland">
-              <div class="hp on" data-h="robot"><div class="robot"><div class="bottom"></div><div class="eyes"><i></i><i></i></div></div></div>
-              <div class="hp sp-music" data-h="music"><span class="cover-l"></span><span class="m-txt"><b>Langit Biru</b><small>Rey · Rey Music</small><em>Menyala pelan, warna biru</em></span><span class="eq"><i></i><i></i><i></i><i></i></span></div>
-              <div class="hp" data-h="otp"><span class="avatar sys" style="background:linear-gradient(135deg,#7cf7ff,#3d8bff)">🔐</span><span class="notif-txt"><b>Bank Rey</b><span>Kode OTP kamu 482 913</span></span><span class="otp-btn">Salin</span></div>
-              <div class="hp idle-pill" data-h="clock"><span class="mono st-clock">09.41</span><span class="bat">80%<i></i></span></div>
-              <div class="hp live-pill" data-h="pray" style="--lv:#30d158"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b class="lv-t">Maghrib 17.49</b><span class="lv-d">5 menit lagi</span></div>
-              <div class="hp live-pill" data-h="phone" style="--lv:#7cf7ff"><span class="lv-ic"><svg viewBox="0 0 22 22"><rect x="6.5" y="2.5" width="9" height="17" rx="2.2"/><path d="M10 16.5h2"/></svg></span><b class="lv-t">liburan.jpg → HP</b><span class="lv-d ph-pct">68%</span><i class="ph-bar"></i></div>
-              <div class="hp" data-h="remind"><div class="robot"><div class="bottom"></div><div class="eyes"><i></i><i></i></div></div></div>
-            </div>
-            <div class="h-mic"><svg viewBox="0 0 22 22"><path d="M11,3.2 A2.6,2.6 0 0 1 13.6,5.8 V10.6 A2.6,2.6 0 0 1 8.4,10.6 V5.8 A2.6,2.6 0 0 1 11,3.2 Z M5.8,10.2 A5.2,5.2 0 0 0 16.2,10.2 M11,15.4 V18.6"/><path class="slash" d="M4,3.5 L18,17.5"/></svg><span>Mic</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="story-steps">
-        <article class="step" data-s="robot"><span class="step-n">01</span><h3>Saat sepi, ada yang menemani.</h3><p>Tidak ada yang diputar? Island berubah jadi sepasang mata yang melirik, berkedip, dan ikut merasakan kondisi laptopmu.</p></article>
-        <article class="step" data-s="music"><span class="step-n">02</span><h3>Lagu &amp; lirik, selalu di atas.</h3><p>Spotify, YouTube, atau pemutar lain. Arahkan kursor untuk lirik yang bergulir dan tombol putar.</p></article>
-        <article class="step" data-s="otp"><span class="step-n">03</span><h3>Kode OTP? Tinggal Salin.</h3><p>Notifikasi tampil ringkas. Kode OTP langsung bisa disalin dan tidak tersimpan di riwayat clipboard.</p></article>
-        <article class="step" data-s="clock" data-mic><span class="step-n">04</span><h3>Rapat? Mic di ujung jari.</h3><p>Zoom, Meet, Teams, atau video call WhatsApp terdeteksi sendiri. Musik dijeda, notifikasi ditahan, dan satu klik membisukan mic di semua aplikasi.</p></article>
-        <article class="step" data-s="pray"><span class="step-n">05</span><h3>Waktu sholat, tanpa internet.</h3><p>Hitung mundur menjelang adzan, dihitung langsung di laptopmu dengan kriteria Kemenag. Musik dijeda, lalu dilanjutkan lagi.</p></article>
-        <article class="step" data-s="phone"><span class="step-n">06</span><h3>Kirim file ke HP, tanpa kabel.</h3><p>Pindai QR sekali, lalu kirim file laptop ⇄ HP lewat Wi-Fi yang sama. Progresnya tampil di island.</p></article>
-        <article class="step" data-s="remind"><span class="step-n">07</span><h3>Matamu juga perlu istirahat.</h3><p>Tiap 20 sampai 60 menit robot memperagakan senam mata. Ikuti dia: lihat jauh selama 20 detik.</p></article>
-      </div>
+    <div class="story-steps">
+      <article class="step" data-isl="music"><span class="step-n">01 / musik</span><h3>Lagu &amp; lirik, selalu di atas.</h3><p>Spotify, YouTube, atau pemutar lain. Arahkan kursor untuk lirik yang bergulir dan tombol putar.</p></article>
+      <article class="step" data-isl="otp"><span class="step-n">02 / notifikasi</span><h3>Kode OTP? Tinggal Salin.</h3><p>Notifikasi tampil ringkas. Kode OTP langsung bisa disalin dan tidak tersimpan di riwayat clipboard.</p></article>
+      <article class="step" data-isl="meet"><span class="step-n">03 / mode rapat</span><h3>Rapat? Mic di ujung jari.</h3><p>Zoom, Meet, Teams, atau video call WhatsApp terdeteksi sendiri. Musik dijeda, notifikasi ditahan, dan satu klik membisukan mic di semua aplikasi.</p></article>
+      <article class="step" data-isl="pray"><span class="step-n">04 / sholat</span><h3>Waktu sholat, tanpa internet.</h3><p>Yang di atas itu jadwal kotamu yang sebenarnya. Hitung mundur menjelang adzan, musik dijeda, lalu dilanjutkan lagi.</p></article>
+      <article class="step" data-isl="phone"><span class="step-n">05 / sambung HP</span><h3>Kirim file ke HP, tanpa kabel.</h3><p>Pindai QR sekali, lalu kirim file laptop ⇄ HP lewat Wi-Fi yang sama. Progresnya tampil di island.</p></article>
+      <article class="step" data-isl="remind"><span class="step-n">06 / istirahat mata</span><h3>Matamu juga perlu istirahat.</h3><p>Tiap 20 sampai 60 menit robot memperagakan senam mata. Ikuti dia: lihat jauh selama 20 detik.</p></article>
     </div>
   </div>
 </section>
 
 <!-- ================= Demo: laptop sungguhan ================= -->
-<section class="demo" id="coba">
+<section class="demo" id="coba" data-isl="robot">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">Coba langsung</span>
@@ -1523,92 +1561,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
   </div>
 </section>
 
-<section id="fitur">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Fitur</span>
-      <h2>Kecil di layar, <span class="hl">banyak gunanya.</span></h2>
-      <p class="sub">Arahkan kursor ke island, lalu pindah fitur lewat tab, panah ‹ ›, atau geser.</p>
-    </div>
-    <div class="bento">
-      <article class="b-card b-music reveal" style="--d:0">
-        <div class="b-vis">
-          <div class="mini-panel">
-            <div class="mp-row"><span class="cover-l"></span><span><b>Langit Biru</b><small>Rey · Rey Music</small></span><span class="mp-play">❚❚</span></div>
-            <div class="mp-ly"><span>Di ujung layar aku menunggu</span><span class="cur">Menyala pelan, warna biru</span><span>Setiap lagu jadi milikmu</span></div>
-            <div class="mp-pr"><i></i></div>
-          </div>
-        </div>
-        <h3>Musik dengan lirik sinkron</h3>
-        <p>Lirik bergulir mengikuti lagu. Klik baris untuk lompat, atur volume, dan pindah speaker ⇄ headphone sekali klik.</p>
-        <button class="try-it" data-try="music">Coba di demo ↑</button>
-      </article>
-      <article class="b-card reveal" style="--d:1">
-        <div class="b-vis"><div class="mini mini-timer"><svg viewBox="0 0 16 16"><path d="M8 15a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11ZM8 6.5v3l1.8 1.2M6 1.5h4"/></svg><b class="mono" id="bTimer">24:59</b></div></div>
-        <h3>Timer &amp; Pomodoro</h3>
-        <p>1, 5, 10 menit, Pomodoro, atau stopwatch. Bisa dipisah jadi pil kecil.</p>
-        <button class="try-it" data-try="timer">Coba ↑</button>
-      </article>
-      <article class="b-card reveal" style="--d:2">
-        <div class="b-vis"><div class="mini-tiles"><span><i class="th pdf"></i></span><span><i class="th folder"></i></span><span><i class="th img"></i></span></div></div>
-        <h3>Shelf file</h3>
-        <p>Seret file ke island, simpan sebentar, seret keluar lagi. Banyak sekaligus.</p>
-        <button class="try-it" data-try="shelf">Coba ↑</button>
-      </article>
-      <article class="b-card b-wide reveal" style="--d:1">
-        <div class="b-vis"><div class="mini mini-notif"><span class="avatar">D</span><span class="notif-txt"><b>Dinda</b><span>Nanti malam jadi nonton? 🍿</span></span><span class="notif-time">sekarang</span></div></div>
-        <h3>Notifikasi ringkas, termasuk OTP</h3>
-        <p>Lebarnya ikut panjang pesan, lengkap dengan foto profil WhatsApp. Klik untuk membuka chat-nya.</p>
-        <button class="try-it" data-try="notif">Coba ↑</button>
-      </article>
-      <article class="b-card reveal" style="--d:0">
-        <div class="b-vis"><div class="mini mini-rec"><span class="rec-dot"></span><b>Merekam</b><span class="mono" style="color:var(--red)">00:42</span></div></div>
-        <h3>Tangkap &amp; rekam layar</h3>
-        <p>Ctrl + Shift + S. Rekam dengan suara sistem dan mikrofon.</p>
-        <button class="try-it" data-try="capture">Coba ↑</button>
-      </article>
-      <article class="b-card reveal" style="--d:1">
-        <div class="b-vis"><div class="mini live-pill mini-dl" style="--lv:#3d8bff"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M11 3v11M6.5 9.5 11 14l4.5-4.5M4.5 18.5h13"/></svg></span><b class="lv-t">desain-final.zip</b><span class="lv-d">4,2 MB/s</span><i class="ph-bar"></i></div></div>
-        <h3>Live activity unduhan</h3>
-        <p>Unduhan Chrome, Edge, dan Firefox. Selesai? Klik untuk membuka foldernya.</p>
-      </article>
-      <article class="b-card reveal" style="--d:2">
-        <div class="b-vis"><div class="mini mini-clock"><b class="mono">09.41</b><span class="g-dot"></span><span class="bat">80%<i></i></span></div></div>
-        <h3>Titik kamera &amp; mikrofon</h3>
-        <p>Hijau saat kamera menyala, oranye saat hanya mikrofon.</p>
-      </article>
-      <article class="b-card reveal" style="--d:3">
-        <div class="b-vis"><div class="mini mini-aurora"><span class="art"></span><b>Kota Malam</b><span class="eq"><i></i><i></i><i></i><i></i></span></div></div>
-        <h3>Tema Aurora</h3>
-        <p>Biru gelap seperti kaca, pendarnya ikut warna cover lagu.</p>
-        <button class="try-it" data-try="aurora">Nyalakan ↑</button>
-      </article>
-      <article class="b-card b-wide reveal" style="--d:0">
-        <div class="b-vis"><div class="mini-pray"><span>Subuh<b>04.09</b></span><span>Dzuhur<b>11.40</b></span><span class="on">Ashar<b>14.55</b></span><span>Maghrib<b>17.50</b></span><span>Isya<b>19.00</b></span></div></div>
-        <h3>Hari ini: sholat, libur nasional &amp; kalender</h3>
-        <p>46 kota WIB, WITA, WIT. Imsak dan buka puasa saat Ramadan. Sambungkan Google Calendar, Outlook, atau iCloud lewat tautan iCal.</p>
-        <button class="try-it" data-try="today">Coba ↑</button>
-      </article>
-      <article class="b-card reveal" style="--d:1">
-        <div class="b-vis"><div class="mini live-pill" style="--lv:#30d158"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M18.5 11a7.5 7.5 0 1 1-2.2-5.3M18.5 3.5v4h-4"/></svg></span><b class="lv-t">Versi baru</b><span class="lv-btn" style="background:#30d158">Perbarui</span></div></div>
-        <h3>Pembaruan otomatis</h3>
-        <p>Satu klik: unduh, pasang, buka ulang sendiri.</p>
-      </article>
-      <article class="b-card reveal" style="--d:2">
-        <div class="b-vis"><div class="mini-clip"><span>📋 Jadwal rapat jam 3</span><span>🖼 tangkapan.png</span><span>🔗 techreyy.github.io</span></div></div>
-        <h3>Riwayat clipboard</h3>
-        <p>10 salinan terakhir, hanya di memori. Mati secara bawaan.</p>
-      </article>
-      <article class="b-card b-full reveal" style="--d:0">
-        <div class="b-keys"><span><kbd>Scroll</kbd> volume</span><span><kbd>Klik 2×</kbd> play/pause</span><span><kbd>Geser</kbd> pindah tab</span><span><kbd>Layar penuh</kbd> sembunyi</span><span><kbd>75–130%</kbd> ukuran</span><span><kbd>Multi monitor</kbd></span></div>
-        <h3>Tahu diri, gampang diatur</h3>
-        <p>Sembunyi saat game atau video layar penuh, minggir kalau menutupi tombol aplikasi lain, dan muncul lagi saat kursor ditahan di tempatnya. Pengaturannya rapi per kategori, dibuka dari tombol gear.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="robot" class="band">
+<section id="robot" class="band" data-isl="robot">
   <div class="wrap robot-sec">
     <div class="robot-big reveal" id="robotBig">
       <div class="island"><div class="page robot on"><div class="bottom"></div><div class="eyes" id="bigEyes"><i></i><i></i></div><span class="sweat"></span><span class="spark">✦</span>
@@ -1636,23 +1589,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
   </div>
 </section>
 
-<section id="privasi">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Ringan &amp; privat</span>
-      <h2>Dibuat asli untuk <span class="hl">Windows</span>.</h2>
-      <p class="sub">Bukan halaman web yang dibungkus. ReyLand dibangun dengan .NET dan WPF, ukurannya cuma ±8 MB, dan tetap tajam di layar dengan skala berapa pun.</p>
-    </div>
-    <div class="points">
-      <div class="point reveal" style="--d:0"><h4>Tanpa akun</h4><p>Langsung pakai, tidak perlu daftar atau login.</p></div>
-      <div class="point reveal" style="--d:1"><h4>Data lokal</h4><p>Pengaturan, file shelf, dan jadwal sholat dihitung serta disimpan di komputermu.</p></div>
-      <div class="point reveal" style="--d:2"><h4>Kamu yang pilih</h4><p>Island tidak ikut terekam di screenshot dan rekaman layar, kecuali kamu menyalakannya di Pengaturan.</p></div>
-      <div class="point reveal" style="--d:3"><h4>Tajam di semua skala</h4><p>Menyesuaikan skala layar (DPI) secara otomatis, dari 100% sampai 200%.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="unduh">
+<section id="unduh" data-isl="dl">
   <div class="wrap">
     <div class="download reveal">
       <div class="mini-eyes"><i></i><i></i></div><br>
@@ -1668,6 +1605,8 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
         <span>Windows 10 (2004+) / 11</span>
         <span>64-bit</span>
         <span>Installer ±4 MB</span>
+        <span>Tanpa akun</span>
+        <span>Data tetap di laptopmu</span>
         <span>Gratis</span>
       </div>
       <div class="dl-steps">
@@ -1679,60 +1618,7 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
   </div>
 </section>
 
-<section id="kopi" style="padding-top:0">
-  <div class="wrap">
-    <div class="coffee reveal">
-      <div class="cup" aria-hidden="true">
-        <span class="steam"><i></i><i></i><i></i></span>
-        <span class="mug"><span class="eyes"><i></i><i></i></span></span>
-        <span class="saucer"></span>
-      </div>
-      <div>
-        <span class="eyebrow">Dukung ReyLand</span>
-        <h2>Suka ReyLand? Traktir kopi.</h2>
-        <p class="sub">ReyLand gratis dan akan tetap gratis. Kalau island kecil ini bikin harimu lebih enak, secangkir kopi bikin pembuatnya semangat menambah fitur baru.</p>
-        <div class="coffee-cta">
-          <a class="btn btn-coffee" href="https://saweria.co/techreyy" target="_blank" rel="noopener"><span class="bean">☕</span><span>Traktir kopi</span></a>
-          <span class="coffee-note">lewat Saweria · QRIS, GoPay, OVO, DANA</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="kreator" class="band">
-  <div class="wrap">
-    <div class="creator reveal">
-      <div>
-        <div class="who">
-          <div class="ava"><span><i></i><i></i></span></div>
-          <div><div class="handle">@techreyy_</div><div class="role">Pembuat ReyLand</div></div>
-        </div>
-        <h2 style="font-size:clamp(26px,3.6vw,38px)">Kenalan sama pembuatnya.</h2>
-        <p class="sub">ReyLand dibuat oleh techreyy. Ikuti Instagram dan TikTok-nya untuk konten teknologi, tips Windows, dan cerita di balik pembuatan ReyLand, termasuk fitur yang akan datang.</p>
-      </div>
-      <div class="social-cards">
-        <a class="social reveal" style="--d:1" href="https://instagram.com/techreyy_" target="_blank" rel="noopener">
-          <span class="logo ig"><svg class="ic"><use href="#i-ig"/></svg></span>
-          <span><b>Instagram</b><span>@techreyy_</span></span>
-          <span class="go">Ikuti →</span>
-        </a>
-        <a class="social reveal" style="--d:2" href="https://www.tiktok.com/@techreyy_" target="_blank" rel="noopener">
-          <span class="logo tt"><svg class="ic"><use href="#i-tt"/></svg></span>
-          <span><b>TikTok</b><span>@techreyy_</span></span>
-          <span class="go">Ikuti →</span>
-        </a>
-        <a class="social reveal" style="--d:3" href="https://github.com/techreyy/ReyLand/releases/latest" target="_blank" rel="noopener">
-          <span class="logo tt" style="box-shadow:none"><svg class="ic"><use href="#i-gh"/></svg></span>
-          <span><b>GitHub</b><span>Unduhan &amp; catatan rilis</span></span>
-          <span class="go">Lihat →</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" style="padding-top:20px">
+<section id="faq" data-isl="kopi">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">FAQ</span>
@@ -1757,6 +1643,28 @@ footer { margin-top: 40px; border-top: 1px solid var(--line); color: var(--muted
       <details><summary>Bagaimana mode rapat bekerja?</summary><p>Saat kamera atau mikrofon dipakai lebih dari 6 detik (video call WhatsApp, Zoom, Meet, Teams, Discord, telepon), ReyLand menganggapmu sedang rapat: musik dijeda, notifikasi ditahan, dan gelembung mikrofon muncul di samping island. Klik gelembungnya untuk membisukan atau menyalakan mic di semua aplikasi rapat sekaligus; warnanya merah saat bisu. Selesai rapat, musik lanjut dan ada ringkasan notifikasi. Aplikasi tertentu bisa dikecualikan di Pengaturan.</p></details>
       <details><summary>Sambung HP tidak mau terhubung?</summary><p>Laptop dan HP harus di Wi-Fi yang sama. Kalau Windows menandai Wi-Fi-mu sebagai jaringan Publik, ReyLand menampilkan tombol <b>Jadikan Private</b>; klik sekali (khusus Wi-Fi rumah atau kantor yang kamu percaya), lalu pindai QR-nya lagi.</p></details>
       <details><summary>Riwayat clipboard aman?</summary><p>Fitur ini mati secara bawaan. Kalau dinyalakan, 10 teks/gambar terakhir hanya disimpan di memori (hilang saat ReyLand ditutup) dan isi yang ditandai rahasia oleh pengelola kata sandi tidak dicatat.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="kopi" data-isl="kopi">
+  <div class="wrap">
+    <div class="coffee reveal">
+      <div class="cup" aria-hidden="true">
+        <span class="steam"><i></i><i></i><i></i></span>
+        <span class="mug"><span class="eyes"><i></i><i></i></span></span>
+        <span class="saucer"></span>
+      </div>
+      <div>
+        <span class="eyebrow">Dukung ReyLand</span>
+        <h2>Suka ReyLand? Traktir kopi.</h2>
+        <p class="sub">ReyLand gratis dan akan tetap gratis. Kalau island kecil ini bikin harimu lebih enak, secangkir kopi bikin pembuatnya semangat menambah fitur baru.</p>
+        <div class="coffee-cta">
+          <a class="btn btn-coffee" href="https://saweria.co/techreyy" target="_blank" rel="noopener"><span class="bean">☕</span><span>Traktir kopi</span></a>
+          <span class="coffee-note">lewat Saweria · QRIS, GoPay, OVO, DANA</span>
+        </div>
+        <p class="maker">Dibuat oleh <b>@techreyy_</b> · <a href="https://instagram.com/techreyy_" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@techreyy_" target="_blank" rel="noopener">TikTok</a> · <a href="https://github.com/techreyy/ReyLand/releases/latest" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -2740,7 +2648,7 @@ function finishIntro(fast) {
     document.body.classList.add("ready");
     setVariant(variant);
   };
-  if (fast) { reveal(); return heroCycle(); }
+  if (fast) return reveal();
   // Layar hitam mengecil tepat menjadi island hero, dan mata besar menyusut ke mata robot di dalamnya.
   const hr = $("hIsland").getBoundingClientRect(), eyes = intro.querySelector(".intro-eyes"), er = eyes.getBoundingClientRect(), he = $("hEyes").getBoundingClientRect();
   intro.style.setProperty("--clip", `inset(${hr.top}px ${innerWidth - hr.right}px ${innerHeight - hr.bottom}px ${hr.left}px round ${hr.height / 2}px)`);
@@ -2749,89 +2657,149 @@ function finishIntro(fast) {
   intro.style.setProperty("--es", (he.height / er.height).toFixed(3));
   intro.classList.add("close");
   setTimeout(reveal, 900);
-  setTimeout(heroCycle, 1400);
 }
 
-// Island hero memamerkan fitur bergantian, seperti island sungguhan di atas layar.
-let heroT = 0, heroI = 0;
-const HERO = [
-  { k: "robot", w: 150, h: 38, cap: "Saat sepi, sepasang mata menemani", ms: 2600 },
-  { k: "music", w: 268, h: 40, cap: "Musik & lirik yang sedang diputar", ms: 3000 },
-  { k: "notif", w: 352, h: 52, cap: "Notifikasi ringkas", ms: 3000 },
-  { k: "pray", w: 260, h: 40, cap: "Hitung mundur sholat & adzan", ms: 3000 },
-  { k: "meet", w: 330, h: 40, cap: "Rapat dari kalender, tinggal Gabung", ms: 3000 },
-  { k: "clock", w: 210, h: 34, mic: true, cap: "Mode rapat: klik gelembung mic untuk bisu", ms: 3400 }
-];
-// Satu fungsi untuk semua island pamer (hero & cerita): ganti ukuran, halaman, dan gelembung mic.
+// ================= Island di header: pemandu halaman =================
 function showcase(wrap, st) {
   const hi = wrap.querySelector(".hisland"), mic = wrap.querySelector(".h-mic"), ml = mic.querySelector("span");
-  hi.style.width = st.w + "px"; hi.style.height = st.h + "px"; hi.style.borderRadius = (st.r ?? st.h / 2) + "px";
+  const w = Math.min(st.w, innerWidth - 24);
+  hi.style.width = w + "px"; hi.style.height = st.h + "px"; hi.style.borderRadius = (st.r ?? st.h / 2) + "px";
   hi.querySelectorAll(".hp").forEach(p => p.classList.toggle("on", p.dataset.h === st.k));
   hi.classList.toggle("remind", st.k === "remind");
   wrap.classList.toggle("mic", !!st.mic);
   clearTimeout(wrap._mt);
   mic.classList.remove("muted"); ml.textContent = "Mic";
   if (st.mic) wrap._mt = setTimeout(() => { mic.classList.add("muted"); ml.textContent = "Bisu"; }, 1700);
-  const cap = wrap.querySelector(".h-cap");
-  if (cap && st.cap) cap.textContent = st.cap;
 }
-function heroShow(i) { showcase($("hWrap"), HERO[i]); }
-
-// Cerita: island di layar mengikuti langkah yang sedang dibaca.
-const STORY = {
+const ISL = {
   robot: { k: "robot", w: 150, h: 38 },
   music: { k: "music", w: 330, h: 64, r: 26 },
   otp: { k: "otp", w: 360, h: 52 },
-  clock: { k: "clock", w: 210, h: 34, mic: true },
-  pray: { k: "pray", w: 250, h: 40 },
+  meet: { k: "clock", w: 210, h: 34, mic: true },
+  pray: { k: "pray", w: 260, h: 40 },
   phone: { k: "phone", w: 270, h: 40 },
-  remind: { k: "remind", w: 150, h: 38 }
+  remind: { k: "remind", w: 150, h: 38 },
+  dl: { k: "dl", w: 320, h: 40 },
+  kopi: { k: "kopi", w: 250, h: 40 },
+  menu: { k: "menu", w: 400, h: 52, r: 26 }
 };
-const stWrap = $("stWrap"), steps = [...document.querySelectorAll(".story-steps .step")];
-let stCur = "";
-function storyGo(k) {
-  if (k === stCur) return;
-  stCur = k;
-  steps.forEach(s => s.classList.toggle("on", s.dataset.s === k));
-  showcase(stWrap, STORY[k]);
+const tIsl = $("tIsl"), tTop = $("nav"), hWrap = $("hWrap"), hEyes = $("hEyes");
+const islEls = [...document.querySelectorAll("[data-isl]")], steps = [...document.querySelectorAll(".story-steps .step")];
+const host = { want: "robot", menu: false, cur: "", mood: "", t: 0 };
+function islApply() {
+  const k = host.menu ? "menu" : host.want;
+  if (k === host.cur) return;
+  host.cur = k;
+  showcase(hWrap, ISL[k]);
+  if (k !== "robot") setMood("");
 }
-const stIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) storyGo(e.target.dataset.s); }), { rootMargin: "-45% 0px -45% 0px" });
-steps.forEach(s => stIO.observe(s));
-storyGo("robot");
-// Progres kirim ke HP berjalan; jam di island cerita ikut jam sungguhan.
+function setMood(m, ms) {
+  clearTimeout(host.t);
+  tTop.classList.remove("m-sleep", "m-wow", "m-happy", "m-hop");
+  host.mood = m;
+  if (m) { void tTop.offsetWidth; tTop.classList.add("m-" + m); }
+  if (ms) host.t = setTimeout(() => setMood(""), ms);
+}
+let lastY = scrollY;
+function islScroll() {
+  const y = innerHeight * .5;
+  let want = "robot", step = null;
+  for (const el of islEls) { const r = el.getBoundingClientRect(); if (r.top < y && r.bottom > y) { want = el.dataset.isl; if (el.classList.contains("step")) step = el; } }
+  steps.forEach(s => s.classList.toggle("on", s === step));
+  document.body.classList.toggle("in-story", !!step && !host.menu);
+  host.want = want; islApply();
+  if (host.cur === "robot" && Math.abs(scrollY - lastY) > 240 && !reduced) setMood("wow", 700);
+  lastY = scrollY;
+  wakeUp();
+}
+let islTick = false;
+addEventListener("scroll", () => { if (!islTick) { islTick = true; requestAnimationFrame(() => { islTick = false; islScroll(); }); } }, { passive: true });
+addEventListener("resize", () => { host.cur = ""; islApply(); });
+
+// Robot tuan rumah: mata mengikuti kursor, senang di tombol Unduh & kopi, mengantuk kalau dibiarkan.
+let idleT = 0;
+function wakeUp() {
+  if (host.mood === "sleep") setMood("hop", 800);
+  clearTimeout(idleT);
+  idleT = setTimeout(() => { if (host.cur === "robot" && !host.mood) setMood("sleep"); }, 9000);
+}
+addEventListener("pointermove", e => {
+  wakeUp();
+  if (host.cur !== "robot" || host.mood === "sleep") return;
+  const r = tIsl.getBoundingClientRect();
+  const dx = (e.clientX - (r.left + r.width / 2)) / (innerWidth / 2), dy = (e.clientY - r.bottom) / innerHeight;
+  hEyes.classList.add("follow");
+  hEyes.style.transform = `translate(${clamp(dx, -1, 1) * 6}px, ${clamp(dy * 2, -1, 1) * 3}px)`;
+}, { passive: true });
+addEventListener("keydown", wakeUp);
+const HAPPY = "[data-dl], .nav-cta, .btn-kopi, .btn-coffee, .nav-kopi, .btn-primary";
+document.addEventListener("pointerover", e => { if (host.cur === "robot" && e.target.closest(HAPPY)) setMood("happy"); });
+document.addEventListener("pointerout", e => { if (host.mood === "happy" && e.target.closest(HAPPY) && !e.relatedTarget?.closest(HAPPY)) setMood(""); });
+
+// Arahkan kursor ke island: dia melebar jadi menu. Di layar sentuh: ketuk.
+let menuT = 0;
+const menuOk = () => !["dl", "kopi"].includes(host.want);
+function setMenu(on) { clearTimeout(menuT); host.menu = on && menuOk(); document.body.classList.toggle("in-story", false); islApply(); if (!on) islScroll(); }
+tIsl.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") { clearTimeout(menuT); menuT = setTimeout(() => setMenu(true), 140); } });
+tIsl.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { clearTimeout(menuT); menuT = setTimeout(() => setMenu(false), 260); } });
+tIsl.addEventListener("click", e => {
+  if (e.target.closest(".menu-pg a")) return setMenu(false);
+  if (e.target.closest("a")) return;
+  if (!host.menu) setMenu(true);
+});
+document.addEventListener("click", e => { if (host.menu && !tIsl.contains(e.target)) setMenu(false); });
+
+// Progres kirim ke HP berjalan; jam di island ikut jam sungguhan.
 let phP = 12;
 setInterval(() => {
   phP = phP >= 100 ? 12 : Math.min(100, phP + 4 + Math.round(Math.random() * 5));
-  const el = stWrap.querySelector(".ph-pct");
-  el.textContent = phP >= 100 ? "Terkirim ✓" : phP + "%";
-  const c = $("clockT").textContent; if (c) stWrap.querySelector(".st-clock").textContent = c;
+  hWrap.querySelector(".ph-pct").textContent = phP >= 100 ? "Terkirim ✓" : phP + "%";
 }, 700);
 
-// Angka menghitung naik saat terlihat.
-const countIO = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return;
-  countIO.unobserve(e.target);
-  const b = e.target, n = +b.dataset.count, pre = b.dataset.pre || "", suf = b.dataset.suf || "";
-  if (reduced) return;
-  const t0 = performance.now();
-  (function f(t) { const k = Math.min(1, (t - t0) / 1100), v = Math.round(n * (1 - Math.pow(1 - k, 3))); b.textContent = pre + v + suf; if (k < 1) requestAnimationFrame(f); })(t0);
-}), { threshold: .6 });
-document.querySelectorAll("[data-count]").forEach(b => countIO.observe(b));
-
-// Kartu bento: cahaya mengikuti kursor; timer mini berjalan mundur.
-document.querySelectorAll(".b-card").forEach(c => c.addEventListener("pointermove", e => {
-  const r = c.getBoundingClientRect();
-  c.style.setProperty("--mx", e.clientX - r.left + "px"); c.style.setProperty("--my", e.clientY - r.top + "px");
-}));
-let bT = 25 * 60 - 1;
-setInterval(() => { bT = bT > 0 ? bT - 1 : 25 * 60 - 1; $("bTimer").textContent = String(Math.floor(bT / 60)).padStart(2, "0") + ":" + String(bT % 60).padStart(2, "0"); }, 1000);
-function heroCycle() {
-  clearTimeout(heroT);
-  if (reduced) return;
-  heroT = setTimeout(function next() { heroI = (heroI + 1) % HERO.length; heroShow(heroI); heroT = setTimeout(next, HERO[heroI].ms); }, HERO[0].ms);
+// ================= Sapaan, jam, dan jadwal sholat kota pengunjung =================
+// Sama dengan Services/PrayerTimes.cs: kriteria Kemenag (Subuh 20°, Isya 18°), ihtiyat +2 (Dzuhur & Maghrib +3).
+const CITIES = [["Banda Aceh",5.55,95.32,7],["Medan",3.59,98.67,7],["Padang",-0.95,100.35,7],["Pekanbaru",0.51,101.45,7],["Batam",1.13,104.05,7],["Tanjung Pinang",0.92,104.45,7],["Jambi",-1.61,103.61,7],["Bengkulu",-3.80,102.27,7],["Palembang",-2.98,104.76,7],["Pangkal Pinang",-2.13,106.11,7],["Bandar Lampung",-5.43,105.26,7],["Serang",-6.12,106.15,7],["Tangerang",-6.18,106.63,7],["Jakarta",-6.20,106.85,7],["Bekasi",-6.24,106.99,7],["Depok",-6.40,106.82,7],["Bogor",-6.60,106.80,7],["Bandung",-6.92,107.61,7],["Cirebon",-6.73,108.55,7],["Semarang",-6.97,110.42,7],["Yogyakarta",-7.80,110.37,7],["Solo",-7.57,110.82,7],["Surabaya",-7.25,112.75,7],["Malang",-7.98,112.63,7],["Pontianak",-0.03,109.33,7],["Palangka Raya",-2.21,113.92,7],["Banjarmasin",-3.32,114.59,8],["Balikpapan",-1.24,116.85,8],["Samarinda",-0.50,117.15,8],["Tanjung Selor",2.84,117.37,8],["Denpasar",-8.65,115.22,8],["Mataram",-8.58,116.12,8],["Kupang",-10.17,123.61,8],["Makassar",-5.15,119.43,8],["Mamuju",-2.68,118.89,8],["Palu",-0.90,119.87,8],["Kendari",-3.99,122.51,8],["Gorontalo",0.54,123.06,8],["Manado",1.47,124.84,8],["Ambon",-3.70,128.18,9],["Ternate",0.79,127.38,9],["Sorong",-0.88,131.25,9],["Manokwari",-0.86,134.08,9],["Nabire",-3.37,135.50,9],["Jayapura",-2.53,140.72,9],["Merauke",-8.49,140.40,9]];
+const PT = (() => {
+  const R = Math.PI / 180, sin = d => Math.sin(d * R), cos = d => Math.cos(d * R), tan = d => Math.tan(d * R);
+  const asin = x => Math.asin(x) / R, acos = x => Math.acos(x) / R, atan2 = (y, x) => Math.atan2(y, x) / R, acot = x => Math.atan(1 / x) / R;
+  const fixA = a => a - 360 * Math.floor(a / 360), fixH = a => a - 24 * Math.floor(a / 24);
+  function jul(y, m, d) { if (m <= 2) { y--; m += 12; } const a = Math.floor(y / 100), b = 2 - a + Math.floor(a / 4); return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + b - 1524.5; }
+  function sun(jd) { const d = jd - 2451545, g = fixA(357.529 + .98560028 * d), q = fixA(280.459 + .98564736 * d), l = fixA(q + 1.915 * sin(g) + .02 * sin(2 * g)), e = 23.439 - .00000036 * d, ra = fixH(atan2(cos(e) * sin(l), cos(l)) / 15); return [asin(sin(e) * sin(l)), q / 15 - fixH(ra)]; }
+  const mid = (j, t) => fixH(12 - sun(j + t)[1]);
+  function ang(j, lat, a, t, ccw) { const dec = sun(j + t)[0], noon = mid(j, t), c = (-sin(a) - sin(dec) * sin(lat)) / (cos(dec) * cos(lat)), span = acos(Math.max(-1, Math.min(1, c))) / 15; return noon + (ccw ? -span : span); }
+  function asr(j, lat, t) { const dec = sun(j + t)[0]; return ang(j, lat, -acot(1 + tan(Math.abs(lat - dec))), t, false); }
+  // Mengembalikan waktu (ms UTC) untuk tanggal kalender y-m-d di kota c.
+  return function (y, m, d, c) {
+    const [, lat, lon] = c, j = jul(y, m, d) - lon / (15 * 24), base = Date.UTC(y, m - 1, d);
+    const at = (h, ih = 2) => { const t = base + (h - lon / 15) * 3600e3 + ih * 60e3; return Math.ceil(t / 60e3) * 60e3; };
+    return [["Subuh", at(ang(j, lat, 20, 5 / 24, true))], ["Dzuhur", at(mid(j, .5), 3)], ["Ashar", at(asr(j, lat, 13 / 24))], ["Maghrib", at(ang(j, lat, .833, .75, false), 3)], ["Isya", at(ang(j, lat, 18, .75, false))]];
+  };
+})();
+const pCity = $("pCity");
+CITIES.forEach(([n], i) => pCity.add(new Option(n, i)));
+const tzCity = { "Asia/Makassar": "Makassar", "Asia/Jayapura": "Jayapura", "Asia/Pontianak": "Pontianak" }[Intl.DateTimeFormat().resolvedOptions().timeZone] || "Jakarta";
+let cityI = CITIES.findIndex(c => c[0] === tzCity);
+try { const v = localStorage.getItem("rl-city"); if (v !== null) cityI = +v; } catch {}
+if (!(cityI >= 0 && cityI < CITIES.length)) cityI = 13;
+pCity.value = cityI;
+pCity.addEventListener("change", () => { cityI = +pCity.value; try { localStorage.setItem("rl-city", cityI); } catch {} today(); });
+const hhmm = (ms, tz) => { const d = new Date(ms + tz * 3600e3); return String(d.getUTCHours()).padStart(2, "0") + "." + String(d.getUTCMinutes()).padStart(2, "0"); };
+function today() {
+  const now = Date.now(), c = CITIES[cityI], tz = c[3], loc = new Date(now + tz * 3600e3);
+  let list = PT(loc.getUTCFullYear(), loc.getUTCMonth() + 1, loc.getUTCDate(), c), next = list.find(p => p[1] > now);
+  if (!next) { const t = new Date(now + tz * 3600e3 + 864e5); next = PT(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate(), c)[0]; }
+  const mins = Math.ceil((next[1] - now) / 60e3), left = mins < 60 ? mins + " menit lagi" : Math.floor(mins / 60) + " jam " + (mins % 60) + " menit lagi";
+  const label = next[0] + " " + hhmm(next[1], tz);
+  $("pNext").textContent = label; $("pLeft").textContent = left;
+  $("iPrayT").textContent = label; $("iPrayD").textContent = mins < 60 ? mins + " menit lagi" : Math.floor(mins / 60) + " jam lagi";
+  const d = new Date(), h = d.getHours(), clock = String(h).padStart(2, "0") + "." + String(d.getMinutes()).padStart(2, "0");
+  $("greet").textContent = h < 4 ? "Selamat malam" : h < 11 ? "Selamat pagi" : h < 15 ? "Selamat siang" : h < 18 ? "Selamat sore" : "Selamat malam";
+  $("gClock").textContent = clock; $("hClock").textContent = clock;
 }
-$("hWrap").addEventListener("click", () => $("coba").scrollIntoView({ behavior: "smooth" }));
-setInterval(() => { $("hClock").textContent = $("clockT").textContent; }, 1000);
+today();
+setInterval(today, 15000);
+islScroll();
+if (matchMedia("(hover: none)").matches) $("hintUp").lastChild.textContent = "ini island-nya, ukuran asli. ketuk untuk menu";
 if (reduced || deepLink) { finishIntro(true); if (location.hash === "#coba") boot(true); }
 else {
   intro.addEventListener("click", () => finishIntro(false));
