@@ -1,15 +1,17 @@
 # ReyLand
 
-Dynamic Island untuk Windows: musik dan lirik sinkron, timer dan Pomodoro, shelf file dan riwayat clipboard, tangkap dan rekam layar, agenda dan jadwal sholat, notifikasi ringkas, dan robot kecil yang menemani saat sepi.
+Dynamic Island untuk Windows: musik dan lirik sinkron, mode rapat dengan tombol mic, jadwal sholat dan adzan, pengingat istirahat mata, kirim file ke HP, timer dan Pomodoro, shelf file dan riwayat clipboard, tangkap dan rekam layar, agenda dan jadwal sholat, notifikasi ringkas, dan robot kecil yang menemani saat sepi.
 
 **Situs:** https://techreyy.github.io/ReyLand/  
-**Unduh:** [ReyLand.exe (versi terbaru)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe)  
+**Unduh:** [ReyLandSetup.exe (installer, disarankan)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe) · [ReyLand.exe (portable)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe)  
 **Dukung:** [Traktir kopi ☕](https://saweria.co/techreyy)
 
 ## Persyaratan
 
 - Windows 10 versi 2004 (build 19041) atau Windows 11, 64-bit
-- Satu file ±8 MB. Butuh [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0); kalau belum terpasang, Windows menawarkan link unduhannya saat ReyLand pertama dibuka
+- **Installer (±4 MB):** memasang [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0) sendiri bila belum ada (Windows meminta izin admin sekali), lalu memasang ReyLand untuk akunmu
+- **Portable (±8 MB):** satu file tanpa instalasi, butuh .NET 8 Desktop Runtime yang sudah terpasang
+- Setelah terpasang, ReyLand memperbarui dirinya sendiri dari halaman Releases
 
 ## Muncul "Windows protected your PC"?
 
