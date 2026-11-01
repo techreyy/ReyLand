@@ -1259,7 +1259,9 @@ body.in-story .tether { opacity: .45; }
     <div class="cta rise" style="--i:3">
       <a class="btn btn-primary" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl><svg class="ic"><use href="#i-dl"/></svg><span>Unduh gratis</span></a>
       <a class="btn btn-ghost" href="#coba"><svg class="ic"><use href="#i-play"/></svg><span>Coba dulu di browser</span></a>
+      <a class="btn btn-ghost btn-star" href="https://github.com/techreyy/ReyLand" target="_blank" rel="noopener"><svg class="ic" style="fill:#f4d35e;stroke:#f4d35e"><use href="#i-star"/></svg><span>Kasih bintang</span></a>
     </div>
+    <p class="rise" style="--i:4;margin:18px 0 0;text-align:center;font-size:15px;color:#a9b6d4"><b id="dlCount" style="color:#7cf7ff;font-size:18px">1.000+</b> kali diunduh</p>
     <p class="pray-line rise" style="--i:4"><span class="pl-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b id="pNext">Maghrib 17.49</b><span>di</span><select id="pCity" aria-label="Pilih kota"></select><span id="pLeft">5 menit lagi</span></p>
     <p class="meta rise" style="--i:5">dihitung di browser-mu dengan kriteria Kemenag, sama seperti di aplikasinya · v1.3.0 · Windows 10 &amp; 11 · gratis</p>
   </div>
@@ -2809,6 +2811,18 @@ else {
   intro.addEventListener("click", () => finishIntro(false));
   setTimeout(() => finishIntro(false), 2700);
 }
+</script>
+<script>
+// Jumlah unduhan dari GitHub Releases: tetap "1.000+" kalau API tidak bisa dihubungi.
+(function () {
+  var el = document.getElementById("dlCount"), KEY = "reyland-dl-count", show = function (n) { if (n > 1000) el.textContent = n.toLocaleString("id-ID"); };
+  try { var c = JSON.parse(localStorage.getItem(KEY) || "null"); if (c && Date.now() - c.t < 36e5) return show(c.n); } catch (e) {}
+  fetch("https://api.github.com/repos/techreyy/ReyLand/releases?per_page=100").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
+    var n = list.reduce(function (s, r) { return s + r.assets.reduce(function (a, f) { return a + f.download_count; }, 0); }, 0);
+    show(n);
+    try { localStorage.setItem(KEY, JSON.stringify({ t: Date.now(), n: n })); } catch (e) {}
+  }).catch(function () {});
+})();
 </script>
 </body>
 </html>
