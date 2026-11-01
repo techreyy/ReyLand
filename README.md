@@ -2,9 +2,13 @@
 
 Dynamic Island untuk Windows: musik dan lirik sinkron, mode rapat dengan tombol mic, jadwal sholat dan adzan, pengingat istirahat mata, kirim file ke HP, timer dan Pomodoro, shelf file dan riwayat clipboard, tangkap dan rekam layar, agenda dan jadwal sholat, notifikasi ringkas, dan robot kecil yang menemani saat sepi.
 
+![Demo ReyLand dari situs](docs/preview.png)
+
+*Gambar: demo interaktif di situs. Bisa dicoba langsung di browser.*
+
 **Situs:** https://techreyy.github.io/ReyLand/  
 **Unduh:** [ReyLandSetup.exe (installer, disarankan)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe) · [ReyLand.exe (portable)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe)  
-**Dukung:** [Traktir kopi ☕](https://saweria.co/techreyy)
+**Dukung:** kasih ⭐ di repo ini (tombol Star di kanan atas) · [Traktir kopi ☕](https://saweria.co/techreyy)
 
 ## Persyaratan
 
