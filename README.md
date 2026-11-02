@@ -8,7 +8,7 @@ Dynamic Island untuk Windows: musik dan lirik sinkron, mode rapat dengan tombol 
 
 **Situs:** https://techreyy.github.io/ReyLand/  
 **Unduh:** [ReyLandSetup.exe (installer, disarankan)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe) · [ReyLand.exe (portable)](https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe)  
-**Dukung:** kasih ⭐ di repo ini (tombol Star di kanan atas) · [Traktir kopi ☕](https://saweria.co/techreyy)
+**Dukung:** kasih ⭐ di repo ini (tombol Star di kanan atas) · [Traktir matcha 🍵](https://sociabuzz.com/techreyy)
 
 ## Persyaratan
 
