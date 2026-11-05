@@ -1189,6 +1189,37 @@ body.in-story .tether { opacity: .45; }
   .reveal, .rise { opacity: 1; transform: none; filter: none; }
   #intro { display: none; }
 }
+/* ================= HP dan laptop ================= */
+.hp-sec { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.hp-points { display: grid; gap: 12px; margin-top: 26px; }
+.hp-point { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); transition: border-color .25s, transform .25s; }
+.hp-point:hover { border-color: rgba(124, 247, 255, .35); transform: translateY(-2px); }
+.hp-point b { flex: none; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; font-size: 17px; background: var(--accent-soft); }
+.hp-point strong { display: block; margin-bottom: 3px; color: var(--text); }
+.hp-point p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+.hp-stage { position: relative; display: grid; place-items: center; min-height: 480px; }
+.hp-stage::before { content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(61, 139, 255, .28), transparent 68%); }
+.hp-phone { position: relative; width: 250px; padding: 12px; border-radius: 38px; background: #0b0f1a; border: 1px solid rgba(255, 255, 255, .14); box-shadow: 0 30px 80px rgba(0, 0, 0, .6), inset 0 0 0 2px rgba(255, 255, 255, .03); }
+.hp-screen { border-radius: 28px; background: #05060a; padding: 18px 13px 16px; min-height: 410px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.hp-pill { align-self: center; padding: 6px 13px; border-radius: 999px; background: #000; border: 1px solid var(--line); color: var(--text); font-size: 11.5px; font-weight: 700; display: flex; align-items: center; gap: 7px; }
+.hp-pill i { width: 6px; height: 6px; border-radius: 50%; background: #30d158; box-shadow: 0 0 8px #30d158; }
+.hp-tabs { display: flex; gap: 3px; padding: 3px; border-radius: 12px; background: rgba(255, 255, 255, .05); font-size: 11.5px; font-weight: 700; color: var(--muted); text-align: center; }
+.hp-tabs span { flex: 1; padding: 7px 0; border-radius: 9px; }
+.hp-tabs .on { background: var(--cyan); color: #00131a; }
+.hp-msg { padding: 10px 11px; border-radius: 13px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line); color: var(--text); font-size: 12px; line-height: 1.4; opacity: 0; transform: translateY(12px); animation: hpMsg 9s infinite; }
+.hp-msg small { display: block; margin-top: 5px; color: var(--cyan); font-weight: 700; font-size: 10.5px; }
+.hp-msg:nth-of-type(2) { animation-delay: 1.2s; }
+.hp-msg:nth-of-type(3) { animation-delay: 2.4s; }
+.hp-box { margin-top: auto; padding: 11px; border-radius: 13px; border: 1px solid rgba(124, 247, 255, .35); color: var(--muted); font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hp-box em { font-style: normal; padding: 5px 9px; border-radius: 8px; background: var(--cyan); color: #00131a; font-weight: 800; }
+@keyframes hpMsg { 0% { opacity: 0; transform: translateY(12px); } 8%, 85% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: translateY(-6px); } }
+@media (max-width: 860px) { .hp-sec { grid-template-columns: 1fr; gap: 34px; } .hp-stage { min-height: 450px; } }
+@media (prefers-reduced-motion: reduce) { .hp-msg { animation: none; opacity: 1; transform: none; } }
+
+/* ================= Baru di 1.5 ================= */
+.new-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
+@media (max-width: 960px) { .new-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .new-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body class="intro-on">
@@ -1263,7 +1294,7 @@ body.in-story .tether { opacity: .45; }
     </div>
     <p class="rise" style="--i:4;margin:18px 0 0;text-align:center;font-size:15px;color:#a9b6d4"><b id="dlCount" style="color:#7cf7ff;font-size:18px">1.000+</b> kali diunduh</p>
     <p class="pray-line rise" style="--i:4"><span class="pl-ic"><svg viewBox="0 0 22 22"><path d="M14.5,4.2 A7.4,7.4 0 1 0 17.8,15.6 A6,6 0 1 1 14.5,4.2 Z"/></svg></span><b id="pNext">Maghrib 17.49</b><span>di</span><select id="pCity" aria-label="Pilih kota"></select><span id="pLeft">5 menit lagi</span></p>
-    <p class="meta rise" style="--i:5">dihitung di browser-mu dengan kriteria Kemenag, sama seperti di aplikasinya · v1.4.1 · Windows 10 &amp; 11 · gratis</p>
+    <p class="meta rise" style="--i:5">dihitung di browser-mu dengan kriteria Kemenag, sama seperti di aplikasinya · v1.5.0 · Windows 10 &amp; 11 · gratis</p>
   </div>
 </header>
 
@@ -1564,6 +1595,51 @@ body.in-story .tether { opacity: .45; }
   </div>
 </section>
 
+<!-- ================= HP dan laptop ================= -->
+<section id="hp" class="band">
+  <div class="wrap hp-sec">
+    <div class="reveal">
+      <span class="eyebrow">HP dan laptop</span>
+      <h2>Pindah file dan teks, tanpa kabel.</h2>
+      <p class="sub">Pindai QR sekali dari island. HP langsung tersambung lewat browser, tanpa pasang aplikasi dan tanpa akun.</p>
+      <div class="hp-points">
+        <div class="hp-point"><b>📁</b><div><strong>File dua arah</strong><p>Seret file ke island, langsung muncul di HP. Foto dari HP masuk ke shelf laptop.</p></div></div>
+        <div class="hp-point"><b>📋</b><div><strong>Tempel teks</strong><p>Kirim teks dari HP, lalu tinggal Ctrl+V di laptop. Dari laptop ke HP juga bisa.</p></div></div>
+        <div class="hp-point"><b>🔒</b><div><strong>Tetap di Wi-Fi-mu</strong><p>Semua lewat jaringan yang sama, tidak melewati server mana pun.</p></div></div>
+      </div>
+    </div>
+    <div class="hp-stage reveal" style="--d:1" aria-hidden="true">
+      <div class="hp-phone"><div class="hp-screen">
+        <div class="hp-pill"><i></i>ReyLand</div>
+        <div class="hp-tabs"><span>File</span><span class="on">Teks</span></div>
+        <div class="hp-msg">Link meeting jam 3 sudah aku kirim ya<small>Salin</small></div>
+        <div class="hp-msg">Alamat: Jl. Ahmad Yani No. 12, Kendari<small>Salin</small></div>
+        <div class="hp-msg">Kode kelas: RL-2048<small>Tersalin ✓</small></div>
+        <div class="hp-box"><span>Tempel teks…</span><em>Kirim</em></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Baru di 1.5 ================= -->
+<section id="baru">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Baru di 1.5</span>
+      <h2>Lirik ikut main game, bahasa ganti seketika.</h2>
+      <p class="sub">Bahasa, tema, dan pilihan tampil island langsung berlaku tanpa membuka ulang aplikasi.</p>
+    </div>
+    <div class="new-grid reveal" style="--d:1">
+      <div class="hp-point"><b>🎮</b><div><strong>Musik saat main game</strong><p>Nyalakan opsinya, dan lagu serta liriknya tetap tampil di atas game mode borderless. Tidak bisa diklik, jadi permainanmu tidak terganggu.</p></div></div>
+      <div class="hp-point"><b>🌐</b><div><strong>Indonesia dan English</strong><p>Pilih bahasanya, dan tampilannya langsung berganti tanpa membuka ulang.</p></div></div>
+      <div class="hp-point"><b>🎤</b><div><strong>Lirik lebih tepat</strong><p>Waktunya bisa digeser dan tersimpan per lagu. Liriknya salah? Tandai, lalu ReyLand mencari versi lain.</p></div></div>
+      <div class="hp-point"><b>🎨</b><div><strong>Tema Matcha, Senja, dan Neon</strong><p>Hijau teh, ungu ke oranye, atau garis menyala yang mengikuti warna cover lagu.</p></div></div>
+      <div class="hp-point"><b>👁️</b><div><strong>Kapan island tampil</strong><p>Selalu tampil, hanya saat ada aktivitas, atau disembunyikan sampai dibuka lagi dari ikon tray.</p></div></div>
+      <div class="hp-point"><b>🤖</b><div><strong>Robot lebih ekspresif</strong><p>Menoleh dua kali, menyipit, menguap, memutar bola mata, dan meregang.</p></div></div>
+    </div>
+  </div>
+</section>
+
 <section id="robot" class="band" data-isl="robot">
   <div class="wrap robot-sec">
     <div class="robot-big reveal" id="robotBig">
@@ -1596,7 +1672,7 @@ body.in-story .tether { opacity: .45; }
   <div class="wrap">
     <div class="download reveal">
       <div class="mini-eyes"><i></i><i></i></div><br>
-      <span class="eyebrow">Unduh · Versi 1.4.1</span>
+      <span class="eyebrow">Unduh · Versi 1.5.0</span>
       <h2>Hidupkan layarmu sekarang.</h2>
       <p class="sub">Jalankan <b>ReyLandSetup.exe</b> lalu klik Pasang. Kalau .NET 8 belum ada di laptopmu, installer mengunduh dan memasangnya sendiri, jadi tidak perlu mencari apa-apa lagi. Setelah itu ReyLand memperbarui dirinya otomatis.</p>
       <div class="cta">
@@ -1637,7 +1713,9 @@ body.in-story .tether { opacity: .45; }
       <details><summary>Cara memasangnya? Perlu install apa lagi?</summary><p>Unduh <b>ReyLandSetup.exe</b> (±4 MB), buka, lalu klik Pasang. ReyLand butuh .NET 8 Desktop Runtime dari Microsoft; kalau belum ada, installer mengunduh (±55 MB, sekali saja) dan memasangnya sendiri. Windows akan meminta izin admin satu kali untuk itu. ReyLand dipasang untuk akunmu saja dan muncul di menu Start. Mau tanpa instalasi? Pakai versi portable ReyLand.exe (±8 MB) kalau .NET 8 sudah terpasang.</p></details>
       <details><summary>Apa beda Dynamic dan Notch?</summary><p>Dynamic melayang sedikit di bawah tepi layar seperti pil. Notch menempel di tepi atas layar seperti poni laptop. Saat island digeser menjauh dari tepi atas, otomatis menjadi Dynamic.</p></details>
       <details><summary>Island-nya bisa dipindah atau diperbesar?</summary><p>Island selalu di tengah atas layar supaya kamu tidak perlu mencarinya. Di Pengaturan › Umum kamu bisa memilih monitornya (monitor utama, monitor tertentu, atau ikut kursor), dan di Pengaturan › Tampilan ukurannya bisa diatur dari 75% sampai 130%, atau Otomatis menyesuaikan layar. Pil timer yang dipisahkan dari island bisa digeser: tekan lama lalu geser.</p></details>
-      <details><summary>Island tiba-tiba menghilang?</summary><p>Island sembunyi saat aplikasi layar penuh berjalan, dan mengecil jadi pil berisi jam saat menutupi tombol di bawahnya. Di desktop, Word, Excel, dan PowerPoint island tetap tampil penuh. Mau memakainya sebentar? Tahan kursor di tempat island biasanya berada, dia akan muncul lagi. Kalau terlalu sering minggir, matikan fitur menyingkir atau kecualikan aplikasi tertentu di Pengaturan › Aplikasi.</p></details>
+      <details><summary>Bisa lihat lirik sambil main game?</summary><p>Bisa. Nyalakan <b>Musik saat layar penuh</b> di Pengaturan › Perilaku. Selama musik diputar, island menampilkan lagu dan baris liriknya di atas game, dan tidak bisa diklik supaya permainan tidak terganggu. Game harus memakai mode <b>borderless</b> (windowed fullscreen), karena di mode exclusive fullscreen island tidak terlihat. Opsi ini juga berlaku untuk aplikasi layar penuh lain seperti video.</p></details>
+      <details><summary>Ada bahasa Inggris?</summary><p>Ada. Pilih di Pengaturan › Umum › Bahasa, dan tampilannya langsung berganti. Pemasangan baru mengikuti bahasa Windows. Sebagian kecil teks, terutama beberapa notifikasi, masih berbahasa Indonesia.</p></details>
+      <details><summary>Island tiba-tiba menghilang?</summary><p>Island sembunyi saat aplikasi layar penuh berjalan, kecuali kalau opsi Musik saat layar penuh menyala, dan mengecil jadi pil berisi jam saat menutupi tombol di bawahnya. Di desktop, Word, Excel, dan PowerPoint island tetap tampil penuh. Mau memakainya sebentar? Tahan kursor di tempat island biasanya berada, dia akan muncul lagi. Kalau terlalu sering minggir, matikan fitur menyingkir atau kecualikan aplikasi tertentu di Pengaturan › Aplikasi.</p></details>
       <details><summary>Di mana hasil screenshot dan rekaman disimpan?</summary><p>Screenshot di folder Gambar\Screenshots dan sekaligus disalin ke clipboard. Rekaman di folder Video\Captures dalam format MP4. Secara bawaan island tidak ikut tertangkap; kalau ingin Dynamic/Notch-nya terlihat di hasil screenshot dan video, nyalakan di Pengaturan › Tangkap Layar.</p></details>
       <details><summary>Bisa memindahkan banyak file dari shelf sekaligus?</summary><p>Bisa. Klik beberapa tile di shelf (atau tombol "Pilih semua"), lalu seret salah satu tile yang terpilih: semua file terpilih ikut terbawa ke folder atau aplikasi tujuan.</p></details>
       <details><summary>Bagaimana cara menjalankan saat Windows menyala?</summary><p>ReyLand menanyakannya saat pertama dibuka. Untuk mengubahnya nanti, arahkan kursor ke island lalu klik tombol roda gigi (atau buka dari ikon tray) → Pengaturan › Umum, lalu nyalakan "Jalankan saat Windows mulai".</p></details>
