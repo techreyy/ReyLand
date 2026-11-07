@@ -1222,6 +1222,48 @@ body.in-story .tether { opacity: .45; }
 .new-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
 @media (max-width: 960px) { .new-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .new-grid { grid-template-columns: 1fr; } }
+
+/* ================= Semua fitur ================= */
+.feat-count { display: inline-flex; align-items: baseline; gap: 6px; margin-top: 18px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(124, 247, 255, .25); background: var(--accent-soft); color: #c9d4ee; font-size: 13.5px; }
+.feat-count b { color: var(--cyan); font: 800 17px var(--mono); }
+.feat-filter { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 0 auto 30px; }
+.feat-filter button { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02); color: #c9d4ee; font-weight: 700; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .2s var(--spring); }
+.feat-filter button:hover { border-color: rgba(124, 247, 255, .4); transform: translateY(-1px); }
+.feat-filter button.on { background: var(--cyan); border-color: var(--cyan); color: #00131a; box-shadow: 0 8px 26px rgba(124, 247, 255, .25); }
+.feat-filter button small { font: 600 11px var(--mono); opacity: .7; }
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.feat-grid .feat { padding: 24px; }
+.feat-grid .feat .icon { font-size: 22px; }
+.feat-grid .feat .cat { position: absolute; top: 22px; right: 22px; font: 600 10.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #6b7488; }
+.feat-grid .feat.hide { display: none; }
+.feat-grid .feat.pop { animation: featIn .5s var(--spring) both; animation-delay: calc(var(--n, 0) * 35ms); }
+@keyframes featIn { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+@media (max-width: 960px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .feat-grid { grid-template-columns: 1fr; } .feat-filter { justify-content: flex-start; } }
+
+/* ================= Dua cara unduh ================= */
+.dl-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 880px; margin: 0 auto; text-align: left; }
+.dl-card { position: relative; display: flex; flex-direction: column; padding: 28px 26px 24px; border-radius: 24px; background: rgba(255, 255, 255, .035); border: 1px solid rgba(255, 255, 255, .1); transition: transform .3s var(--ease), border-color .3s; }
+.dl-card:hover { transform: translateY(-4px); border-color: rgba(124, 247, 255, .35); }
+.dl-card.store { border-color: transparent; background: linear-gradient(#070d1c, #070d1c) padding-box, linear-gradient(135deg, var(--cyan), var(--blue) 55%, rgba(124, 247, 255, .15)) border-box; box-shadow: 0 24px 70px rgba(61, 139, 255, .22); }
+.dl-badge { position: absolute; top: -12px; left: 24px; padding: 4px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 800; letter-spacing: .04em; color: #00131a; background: linear-gradient(135deg, var(--cyan), #9fd7ff); box-shadow: 0 6px 20px rgba(124, 247, 255, .35); }
+.dl-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.dl-logo { flex: none; width: 50px; height: 50px; border-radius: 15px; display: grid; place-items: center; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); }
+.dl-logo svg { width: 28px; height: 28px; }
+.dl-head h3 { font-size: 20px; letter-spacing: -.01em; }
+.dl-head p { color: #a9b6d4; font-size: 13.5px; }
+.dl-list { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 9px; }
+.dl-list li { position: relative; padding-left: 26px; color: #dfe7f7; font-size: 14.5px; line-height: 1.45; }
+.dl-list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: rgba(48, 209, 88, .16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%2330d158' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; }
+.dl-list li.dl-note { color: #8b97b5; font-size: 13.5px; }
+.dl-list li.dl-note::before { background: rgba(255, 255, 255, .06) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='1.4' fill='%238b97b5'/%3E%3C/svg%3E") center / 16px no-repeat; }
+.dl-card .btn { margin-top: auto; justify-content: center; width: 100%; }
+.dl-card .btn-ghost { border-color: rgba(255, 255, 255, .18); }
+.dl-card .alt-dl { margin: 12px 0 0; text-align: center; font-size: 12.5px; }
+.dl-or { max-width: 880px; margin: 18px auto 0; color: #a9b6d4; font-size: 13.5px; }
+.dl-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+.dl-links .btn { padding: 11px 20px; font-size: 14px; }
+@media (max-width: 760px) { .dl-cards { grid-template-columns: 1fr; gap: 22px; } }
 </style>
 </head>
 <body class="intro-on">
@@ -1271,7 +1313,7 @@ body.in-story .tether { opacity: .45; }
         <div class="hp" data-h="remind"><div class="robot"><div class="bottom"></div><div class="eyes"><i></i><i></i></div></div></div>
         <div class="hp live-pill" data-h="dl" style="--lv:#7cf7ff"><span class="lv-ic"><svg viewBox="0 0 22 22"><path d="M11 3.5v10M6.8 9.6 11 13.8l4.2-4.2M4.5 18h13"/></svg></span><b class="lv-t">ReyLandSetup.exe</b><span class="lv-d">±4 MB</span><a class="lv-btn" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl>Unduh</a></div>
         <a class="hp kopi-pill" data-h="kopi" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener"><span class="k-cup">🍵</span><b>Traktir matcha</b><span>SociaBuzz</span></a>
-        <nav class="hp menu-pg" data-h="menu" aria-label="Navigasi"><a href="#cerita"><i>01</i>Cerita</a><a href="#coba"><i>02</i>Coba</a><a href="#robot"><i>03</i>Robot</a><a href="#unduh"><i>04</i>Unduh</a><a href="#faq"><i>05</i>FAQ</a></nav>
+        <nav class="hp menu-pg" data-h="menu" aria-label="Navigasi"><a href="#cerita"><i>01</i>Cerita</a><a href="#coba"><i>02</i>Coba</a><a href="#fitur"><i>03</i>Fitur</a><a href="#robot"><i>04</i>Robot</a><a href="#unduh"><i>05</i>Unduh</a><a href="#faq"><i>06</i>FAQ</a></nav>
       </div>
       <div class="h-mic"><svg viewBox="0 0 22 22"><path d="M11,3.2 A2.6,2.6 0 0 1 13.6,5.8 V10.6 A2.6,2.6 0 0 1 8.4,10.6 V5.8 A2.6,2.6 0 0 1 11,3.2 Z M5.8,10.2 A5.2,5.2 0 0 0 16.2,10.2 M11,15.4 V18.6"/><path class="slash" d="M4,3.5 L18,17.5"/></svg><span>Mic</span></div>
     </div>
@@ -1290,7 +1332,7 @@ body.in-story .tether { opacity: .45; }
     <h1 class="rise" style="--i:1">Bagian atas layarmu, <span class="lit">kini hidup.</span></h1>
     <p class="lead rise" style="--i:2">ReyLand mengubah tepi atas layar Windows jadi island kecil seperti yang ada di atas halaman ini: musik dan lirik, jadwal sholat, mode rapat, timer, shelf file, kirim file ke HP. Muncul saat perlu, minggir saat tidak.</p>
     <div class="cta rise" style="--i:3">
-      <a class="btn btn-primary" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl><svg class="ic"><use href="#i-dl"/></svg><span>Unduh gratis</span></a>
+      <a class="btn btn-primary" href="#unduh" data-dl><svg class="ic"><use href="#i-dl"/></svg><span>Unduh gratis</span></a>
       <a class="btn btn-ghost" href="#coba"><svg class="ic"><use href="#i-play"/></svg><span>Coba dulu di browser</span></a>
       <a class="btn btn-coffee" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener"><span class="bean">🍵</span><span>Traktir matcha</span></a>
     </div>
@@ -1642,6 +1684,59 @@ body.in-story .tether { opacity: .45; }
   </div>
 </section>
 
+<!-- ================= Semua fitur ================= -->
+<section id="fitur" data-isl="robot">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Semua fitur</span>
+      <h2>Satu island, banyak gunanya.</h2>
+      <p class="sub">Semua yang bisa ReyLand lakukan, dalam satu halaman. Pilih kategori untuk melihat lebih dekat.</p>
+      <span class="feat-count"><b id="featNum">0</b> fitur, semuanya gratis</span>
+    </div>
+    <div class="feat-filter reveal" role="group" aria-label="Kategori fitur" id="featFilter">
+      <button class="on" data-cat="all">✨ Semua</button>
+      <button data-cat="musik">🎵 Musik</button>
+      <button data-cat="kerja">⚡ Produktif</button>
+      <button data-cat="notif">🔔 Notifikasi</button>
+      <button data-cat="ibadah">🕌 Ibadah &amp; sehat</button>
+      <button data-cat="tampil">🤖 Robot &amp; tampilan</button>
+    </div>
+    <div class="feat-grid reveal" style="--d:1" id="featGrid">
+      <article class="feat" data-cat="musik"><span class="cat">Musik</span><div class="icon">🎵</div><h3>Musik dan lirik</h3><p>Spotify, YouTube, atau pemutar lain. Cover, progres, dan lirik bergulir yang bisa diklik untuk lompat ke barisnya.</p></article>
+      <article class="feat" data-cat="musik"><span class="cat">Musik</span><div class="icon">🎮</div><h3>Lirik saat main game</h3><p>Lagu dan liriknya tetap tampil di atas game mode borderless, tanpa bisa diklik supaya permainan tidak terganggu.</p></article>
+      <article class="feat" data-cat="musik"><span class="cat">Musik</span><div class="icon">🎤</div><h3>Lirik yang pas</h3><p>Geser waktunya dan tersimpan per lagu. Liriknya salah? Tandai, ReyLand mencari versi lain.</p></article>
+      <article class="feat" data-cat="musik"><span class="cat">Musik</span><div class="icon">🖱️</div><h3>Gestur cepat</h3><p>Scroll di atas island untuk volume, klik dua kali untuk play/pause, geser ke samping untuk pindah tab.</p></article>
+      <article class="feat" data-cat="musik"><span class="cat">Musik</span><div class="icon">🎧</div><h3>Earbuds Bluetooth</h3><p>Island memberi tahu saat earbuds atau headset tersambung, lengkap dengan sisa baterainya.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">📅</div><h3>Hari ini</h3><p>Kalender bulanan, agenda per tanggal, libur nasional, dan to-do yang ditulis langsung di island.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">⏱️</div><h3>Timer dan stopwatch</h3><p>Hitung mundur, stopwatch, dan pil timer yang bisa dipisah lalu digeser ke mana saja.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">🎯</div><h3>Mode Fokus</h3><p>Pomodoro 25 menit dengan notifikasi aplikasi lain ditahan, lalu istirahat 5 menit.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">🗂️</div><h3>Shelf</h3><p>Seret file ke island untuk disimpan sementara, lalu seret keluar lagi ke folder atau aplikasi lain.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">📸</div><h3>Tangkap dan rekam layar</h3><p>Screenshot area atau seluruh layar, plus rekam layar. Pintasan keyboardnya bisa kamu ganti.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">📱</div><h3>Sambung HP</h3><p>Pindai QR sekali, lalu kirim file dan teks laptop ⇄ HP lewat Wi-Fi yang sama. Tanpa aplikasi dan tanpa akun.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">📋</div><h3>Riwayat clipboard</h3><p>Teks dan gambar yang kamu salin bisa diambil lagi dari island. Opsional, mati secara bawaan.</p></article>
+      <article class="feat" data-cat="kerja"><span class="cat">Produktif</span><div class="icon">⬇️</div><h3>Progres unduhan</h3><p>Nama file, ukuran, dan kecepatan unduhan Chrome, Edge, atau Firefox. Klik saat selesai untuk membuka foldernya.</p></article>
+      <article class="feat" data-cat="notif"><span class="cat">Notifikasi</span><div class="icon">🔔</div><h3>Notifikasi di island</h3><p>Pesan dan notifikasi Windows tampil ringkas. Klik untuk langsung membuka aplikasi pengirimnya.</p></article>
+      <article class="feat" data-cat="notif"><span class="cat">Notifikasi</span><div class="icon">🔑</div><h3>Kode OTP sekali klik</h3><p>Kode OTP langsung bisa disalin dan tidak tersimpan di riwayat clipboard.</p></article>
+      <article class="feat" data-cat="notif"><span class="cat">Notifikasi</span><div class="icon">🎙️</div><h3>Mode rapat</h3><p>Zoom, Meet, dan Teams terdeteksi sendiri. Musik dijeda, notifikasi ditahan, dan satu klik membisukan mic di semua aplikasi.</p></article>
+      <article class="feat" data-cat="notif"><span class="cat">Notifikasi</span><div class="icon">🟢</div><h3>Indikator kamera dan mic</h3><p>Titik hijau saat webcam menyala dan oranye saat mikrofon dipakai, seperti di HP.</p></article>
+      <article class="feat" data-cat="notif"><span class="cat">Notifikasi</span><div class="icon">📶</div><h3>Internet putus</h3><p>Island memberi tahu saat internet putus atau Wi-Fi tersambung tanpa internet, dan saat kembali normal.</p></article>
+      <article class="feat" data-cat="notif"><span class="cat">Notifikasi</span><div class="icon">⇪</div><h3>Caps Lock, volume, kecerahan</h3><p>Status Caps Lock, perubahan volume, dan kecerahan layar tampil rapi di island.</p></article>
+      <article class="feat" data-cat="ibadah"><span class="cat">Ibadah</span><div class="icon">🕌</div><h3>Jadwal sholat offline</h3><p>Kriteria Kemenag untuk 514 kabupaten/kota di Indonesia, plus 56 kota Malaysia. Dihitung tanpa internet.</p></article>
+      <article class="feat" data-cat="ibadah"><span class="cat">Ibadah</span><div class="icon">📢</div><h3>Adzan</h3><p>Hitung mundur menjelang waktunya, lalu adzan berkumandang sambil musik dijeda. Suaranya bisa diganti.</p></article>
+      <article class="feat" data-cat="ibadah"><span class="cat">Sehat</span><div class="icon">💧</div><h3>Pengingat minum</h3><p>Robot kehausan mengingatkanmu minum. Target dan jadwalnya diatur langsung dari island.</p></article>
+      <article class="feat" data-cat="ibadah"><span class="cat">Sehat</span><div class="icon">👀</div><h3>Istirahat mata</h3><p>Tiap 20 sampai 60 menit robot memperagakan senam mata. Lihat jauh selama 20 detik.</p></article>
+      <article class="feat" data-cat="ibadah"><span class="cat">Cuaca</span><div class="icon">🌦️</div><h3>Cuaca dan hujan</h3><p>Cuaca di tempatmu, dan kabar kalau hujan diperkirakan turun dalam satu jam ke depan.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Robot</span><div class="icon">🤖</div><h3>Robot yang hidup</h3><p>Mengangguk ikut irama, mengantuk, marah saat baterai lemah, berkeringat saat CPU panas, dan menyambutmu kembali.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Tampilan</span><div class="icon">🎨</div><h3>Tema dan warna</h3><p>Matcha, Senja, Neon, dan lainnya. Warna mata robot juga bisa kamu pilih.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Tampilan</span><div class="icon">💊</div><h3>Dynamic atau Notch</h3><p>Melayang seperti pil atau menempel di tepi layar. Ukuran 75% sampai 130%, di monitor mana saja.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Tampilan</span><div class="icon">👁️</div><h3>Tampil sesuai maumu</h3><p>Selalu tampil, hanya saat ada aktivitas, atau disembunyikan. Otomatis minggir saat layar penuh atau presentasi.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Tampilan</span><div class="icon">🪶</div><h3>Tidak menghalangi</h3><p>Island bisa mengecil sendiri supaya tombol di bawahnya tetap bisa diklik.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Umum</span><div class="icon">🌐</div><h3>Indonesia dan English</h3><p>Ganti bahasa dan tampilannya langsung berubah, tanpa membuka ulang aplikasi.</p></article>
+      <article class="feat" data-cat="tampil"><span class="cat">Umum</span><div class="icon">🔒</div><h3>Privat dan ringan</h3><p>Tanpa akun dan tanpa iklan. Data tetap di laptopmu, dan pembaruan datang otomatis.</p></article>
+    </div>
+  </div>
+</section>
+
 <section id="robot" class="band" data-isl="robot">
   <div class="wrap robot-sec">
     <div class="robot-big reveal" id="robotBig">
@@ -1676,27 +1771,51 @@ body.in-story .tether { opacity: .45; }
       <div class="mini-eyes"><i></i><i></i></div><br>
       <span class="eyebrow">Unduh · Versi 1.5.0</span>
       <h2>Hidupkan layarmu sekarang.</h2>
-      <p class="sub">Jalankan <b>ReyLandSetup.exe</b> lalu klik Pasang. Kalau .NET 8 belum ada di laptopmu, installer mengunduh dan memasangnya sendiri, jadi tidak perlu mencari apa-apa lagi. Setelah itu ReyLand memperbarui dirinya otomatis.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl><svg class="ic"><use href="#i-dl"/></svg><span>Unduh ReyLand</span></a>
-        <a class="btn btn-ghost" href="https://github.com/techreyy/ReyLand/releases/latest" target="_blank" rel="noopener"><svg class="ic"><use href="#i-gh"/></svg><span>Catatan rilis</span></a>
-        <a class="btn btn-ghost btn-star" href="https://github.com/techreyy/ReyLand" target="_blank" rel="noopener"><svg class="ic" style="fill:#f4d35e;stroke:#f4d35e"><use href="#i-star"/></svg><span>Kasih bintang di GitHub</span></a>
+      <p class="sub">Pilih cara pasang yang kamu suka. Dua-duanya gratis, isinya sama, dan sama-sama memperbarui diri otomatis.</p>
+      <div class="dl-cards">
+        <div class="dl-card store">
+          <span class="dl-badge">PALING PRAKTIS</span>
+          <div class="dl-head">
+            <span class="dl-logo"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M9.5 8V6.8a4.5 4.5 0 0 1 9 0V8" fill="none" stroke="#c9d4ee" stroke-width="1.8" stroke-linecap="round"/><rect x="3.5" y="8" width="21" height="16.5" rx="3" fill="#1a2234" stroke="#c9d4ee" stroke-width="1.4"/><rect x="9" y="11.5" width="4.6" height="4.6" fill="#f25022"/><rect x="14.4" y="11.5" width="4.6" height="4.6" fill="#7fba00"/><rect x="9" y="16.9" width="4.6" height="4.6" fill="#00a4ef"/><rect x="14.4" y="16.9" width="4.6" height="4.6" fill="#ffb900"/></svg></span>
+            <div><h3>Microsoft Store</h3><p>Pasang satu klik dari Store.</p></div>
+          </div>
+          <ul class="dl-list">
+            <li>Tanpa peringatan "Windows protected your PC"</li>
+            <li>Diperiksa dan ditandatangani Microsoft</li>
+            <li>Pembaruan otomatis lewat Store</li>
+            <li>Hapus bersih dari Pengaturan Windows</li>
+            <li class="dl-note">Ukurannya lebih besar karena .NET 8 sudah ikut di dalamnya</li>
+          </ul>
+          <a class="btn btn-primary" href="https://apps.microsoft.com/detail/9N9L2WDMKJRG?mode=direct" target="_blank" rel="noopener" data-dl><span>Ambil di Microsoft Store</span></a>
+        </div>
+        <div class="dl-card">
+          <div class="dl-head">
+            <span class="dl-logo"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 3.5h9.5L22 9v15.5H7z" fill="#1a2234" stroke="#c9d4ee" stroke-width="1.4" stroke-linejoin="round"/><path d="M16.5 3.5V9H22" fill="none" stroke="#c9d4ee" stroke-width="1.4" stroke-linejoin="round"/><path d="M14.5 12v7M11.5 16.2l3 3 3-3" fill="none" stroke="#7cf7ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div><h3>File installer</h3><p>ReyLandSetup.exe dari GitHub.</p></div>
+          </div>
+          <ul class="dl-list">
+            <li>Ringan, cuma sekitar 4 MB</li>
+            <li>.NET 8 diunduh otomatis kalau belum ada</li>
+            <li>ReyLand memperbarui dirinya sendiri</li>
+            <li class="dl-note">Muncul "Windows protected your PC"? Klik <i>More info</i>, lalu <i>Run anyway</i></li>
+          </ul>
+          <a class="btn btn-ghost" href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLandSetup.exe" data-dl><svg class="ic"><use href="#i-dl"/></svg><span>Unduh ReyLandSetup.exe</span></a>
+          <p class="alt-dl">Sudah punya .NET 8? Ada <a href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe">versi portable (±8 MB)</a>.</p>
+        </div>
       </div>
-      <p class="dl-matcha">ReyLand gratis. Kalau suka, <a href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">traktir matcha 🍵</a></p>
-      <p class="alt-dl">Sudah punya .NET 8? Ada juga <a href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe">versi portable (ReyLand.exe, ±8 MB)</a> tanpa instalasi.</p>
+      <p class="dl-or">Cukup pasang salah satu. Kedua versi tidak bisa berjalan bersamaan.</p>
       <div class="req">
         <span>Windows 10 (2004+) / 11</span>
         <span>64-bit</span>
-        <span>Installer ±4 MB</span>
         <span>Tanpa akun</span>
         <span>Data tetap di laptopmu</span>
         <span>Gratis</span>
       </div>
-      <div class="dl-steps">
-        <div class="dl-step"><b>1</b><h4>Unduh</h4><p>ReyLandSetup.exe, sekitar 4 MB.</p></div>
-        <div class="dl-step"><b>2</b><h4>Pasang</h4><p>Ada "Windows protected your PC"? Klik <i>More info</i> lalu <i>Run anyway</i>.</p></div>
-        <div class="dl-step"><b>3</b><h4>Selesai</h4><p>Island muncul di atas layar. Selamat datang!</p></div>
+      <div class="dl-links">
+        <a class="btn btn-ghost" href="https://github.com/techreyy/ReyLand/releases/latest" target="_blank" rel="noopener"><svg class="ic"><use href="#i-gh"/></svg><span>Catatan rilis</span></a>
+        <a class="btn btn-ghost btn-star" href="https://github.com/techreyy/ReyLand" target="_blank" rel="noopener"><svg class="ic" style="fill:#f4d35e;stroke:#f4d35e"><use href="#i-star"/></svg><span>Kasih bintang di GitHub</span></a>
       </div>
+      <p class="dl-matcha">ReyLand gratis. Kalau suka, <a href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">traktir matcha 🍵</a></p>
     </div>
   </div>
 </section>
@@ -1712,8 +1831,9 @@ body.in-story .tether { opacity: .45; }
       <details><summary>Gestur apa saja yang ada?</summary><p>Scroll di atas island untuk mengatur volume, klik dua kali untuk play/pause musik, dan geser ke samping untuk pindah tab. Di panel musik, klik atau geser bar progress untuk lompat ke detik tertentu, klik baris lirik untuk lompat ke baris itu, dan atur volume lewat slider di pojok kanan bawah. Notifikasi yang masuk bisa diklik untuk langsung membuka aplikasi pengirimnya. Klik kanan sengaja tidak dipakai supaya tidak salah pencet.</p></details>
       <details><summary>Apa isi tab Hari ini dan Sholat?</summary><p><b>Hari ini</b> berisi kalender bulanan, acara per tanggal, dan to-do yang bisa kamu tulis langsung di island. <b>Sholat</b> menampilkan jadwal hari ini dengan matahari dan bulan yang berjalan mengikuti waktu.</p></details>
       <details><summary>Jadwal sholatnya dari mana?</summary><p>Dihitung langsung di laptopmu dengan kriteria Kemenag (Subuh 20°, Isya 18°, ihtiyat), tanpa internet. Lokasimu ditanyakan saat ReyLand pertama dibuka, dan bisa diganti di Pengaturan › Hari ini. Ketik nama daerahmu: seluruh 514 kabupaten/kota di Indonesia dan 56 kota di Malaysia ada, atau pakai lokasi dari Windows. Kota Malaysia memakai sudut JAKIM dan bisa selisih beberapa menit dari jadwal zona e-Solat. Di sana kamu juga bisa menambah agenda, nanti island memberi tahu saat waktunya tiba.</p></details>
-      <details><summary>Muncul "Windows protected your PC" saat dibuka?</summary><p>Itu peringatan SmartScreen yang muncul untuk aplikasi baru yang belum punya sertifikat tanda tangan berbayar, bukan berarti ada virus. Klik <b>More info</b> (Info selengkapnya), lalu <b>Run anyway</b> (Tetap jalankan). Peringatan ini hanya muncul sekali. Unduh ReyLand hanya dari situs ini atau halaman GitHub Releases resmi.</p></details>
-      <details><summary>Cara memasangnya? Perlu install apa lagi?</summary><p>Unduh <b>ReyLandSetup.exe</b> (±4 MB), buka, lalu klik Pasang. ReyLand butuh .NET 8 Desktop Runtime dari Microsoft; kalau belum ada, installer mengunduh (±55 MB, sekali saja) dan memasangnya sendiri. Windows akan meminta izin admin satu kali untuk itu. ReyLand dipasang untuk akunmu saja dan muncul di menu Start. Mau tanpa instalasi? Pakai versi portable ReyLand.exe (±8 MB) kalau .NET 8 sudah terpasang.</p></details>
+      <details><summary>Muncul "Windows protected your PC" saat dibuka?</summary><p>Itu peringatan SmartScreen yang muncul untuk aplikasi baru yang belum punya sertifikat tanda tangan berbayar, bukan berarti ada virus. Klik <b>More info</b> (Info selengkapnya), lalu <b>Run anyway</b> (Tetap jalankan). Peringatan ini hanya muncul sekali, dan tidak muncul sama sekali kalau kamu memasang dari Microsoft Store. Unduh ReyLand hanya dari situs ini, Microsoft Store, atau halaman GitHub Releases resmi.</p></details>
+      <details><summary>Lewat Microsoft Store atau file installer, pilih yang mana?</summary><p>Isinya sama. <b>Microsoft Store</b> paling praktis: satu klik, tanpa peringatan SmartScreen, dan diperbarui lewat Store. Ukurannya lebih besar karena .NET 8 sudah ikut di dalamnya. <b>File installer</b> lebih kecil (±4 MB) dan mengunduh .NET 8 sendiri kalau belum ada. Pasang salah satu saja, karena keduanya tidak bisa berjalan bersamaan.</p></details>
+      <details><summary>Cara memasangnya? Perlu install apa lagi?</summary><p>Paling mudah lewat <a href="https://apps.microsoft.com/detail/9N9L2WDMKJRG?mode=direct" target="_blank" rel="noopener" style="color:var(--cyan)">Microsoft Store</a>, tidak perlu apa-apa lagi. Kalau memakai file installer: unduh <b>ReyLandSetup.exe</b> (±4 MB), buka, lalu klik Pasang. ReyLand butuh .NET 8 Desktop Runtime dari Microsoft; kalau belum ada, installer mengunduh (±55 MB, sekali saja) dan memasangnya sendiri. Windows akan meminta izin admin satu kali untuk itu. ReyLand dipasang untuk akunmu saja dan muncul di menu Start. Mau tanpa instalasi? Pakai versi portable ReyLand.exe (±8 MB) kalau .NET 8 sudah terpasang.</p></details>
       <details><summary>Apa beda Dynamic dan Notch?</summary><p>Dynamic melayang sedikit di bawah tepi layar seperti pil. Notch menempel di tepi atas layar seperti poni laptop. Saat island digeser menjauh dari tepi atas, otomatis menjadi Dynamic.</p></details>
       <details><summary>Island-nya bisa dipindah atau diperbesar?</summary><p>Island selalu di tengah atas layar supaya kamu tidak perlu mencarinya. Di Pengaturan › Umum kamu bisa memilih monitornya (monitor utama, monitor tertentu, atau ikut kursor), dan di Pengaturan › Tampilan ukurannya bisa diatur dari 75% sampai 130%, atau Otomatis menyesuaikan layar. Pil timer yang dipisahkan dari island bisa digeser: tekan lama lalu geser.</p></details>
       <details><summary>Bisa lihat lirik sambil main game?</summary><p>Bisa. Nyalakan <b>Musik saat layar penuh</b> di Pengaturan › Perilaku. Selama musik diputar, island menampilkan lagu dan baris liriknya di atas game, dan tidak bisa diklik supaya permainan tidak terganggu. Game harus memakai mode <b>borderless</b> (windowed fullscreen), karena di mode exclusive fullscreen island tidak terlihat. Opsi ini juga berlaku untuk aplikasi layar penuh lain seperti video.</p></details>
@@ -1759,7 +1879,7 @@ body.in-story .tether { opacity: .45; }
 <footer>
   <div class="wrap">
     <a class="brand" href="#"><span class="brand-mark"><i></i><i></i></span>ReyLand</a>
-    <span>Dibuat oleh <a href="https://instagram.com/techreyy_" target="_blank" rel="noopener">@techreyy_</a> · Unduhan di <a href="https://github.com/techreyy/ReyLand/releases" target="_blank" rel="noopener">GitHub</a> · <a href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">Traktir matcha 🍵</a></span>
+    <span>Dibuat oleh <a href="https://instagram.com/techreyy_" target="_blank" rel="noopener">@techreyy_</a> · Unduh di <a href="https://apps.microsoft.com/detail/9N9L2WDMKJRG?mode=direct" target="_blank" rel="noopener">Microsoft Store</a> atau <a href="https://github.com/techreyy/ReyLand/releases" target="_blank" rel="noopener">GitHub</a> · <a href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">Traktir matcha 🍵</a></span>
     <div class="socials" style="display:flex">
       <a href="https://instagram.com/techreyy_" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic"><use href="#i-ig"/></svg></a>
       <a href="https://www.tiktok.com/@techreyy_" target="_blank" rel="noopener" aria-label="TikTok"><svg class="ic"><use href="#i-tt"/></svg></a>
@@ -2710,6 +2830,33 @@ document.querySelectorAll(".feat").forEach(card => card.addEventListener("pointe
   card.style.setProperty("--mx", (e.clientX - r.left) + "px");
   card.style.setProperty("--my", (e.clientY - r.top) + "px");
 }));
+
+// Semua fitur: filter kategori dan angka yang menghitung naik saat bagian ini terlihat.
+(() => {
+  const grid = $("featGrid"), cards = [...grid.children], num = $("featNum");
+  $("featFilter").addEventListener("click", e => {
+    const b = e.target.closest("button[data-cat]");
+    if (!b) return;
+    $("featFilter").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    let n = 0;
+    cards.forEach(c => {
+      const show = b.dataset.cat === "all" || c.dataset.cat === b.dataset.cat;
+      c.classList.remove("pop");
+      c.classList.toggle("hide", !show);
+      if (show) { c.style.setProperty("--n", n++); void c.offsetWidth; c.classList.add("pop"); }
+    });
+  });
+  const total = cards.length;
+  num.textContent = total;
+  new IntersectionObserver((en, obs) => {
+    if (!en[0].isIntersecting) return;
+    obs.disconnect();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t0 = performance.now();
+    const step = t => { const k = Math.min(1, (t - t0) / 900); num.textContent = Math.round(total * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }, { threshold: 0.6 }).observe(num);
+})();
 
 const io = new IntersectionObserver(entries => entries.forEach(en => {
   if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
