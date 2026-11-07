@@ -60,10 +60,15 @@ h2 { font-size: clamp(30px, 4.4vw, 44px); }
 .nav .btn { padding: 9px 18px; font-size: 14px; }
 @media (max-width: 640px) { .nav-links { display: none; } .nav .btn { margin-left: auto; } }
 
+.btn-matcha { color: #10240a; background: linear-gradient(135deg, #c9f27b, #7fd65a); box-shadow: 0 10px 30px rgba(127, 214, 90, .28); }
+.btn-matcha:hover { box-shadow: 0 14px 40px rgba(127, 214, 90, .45); }
+.nav-matcha { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 14px; color: #c9f27b; border: 1px solid rgba(201, 242, 123, .45); background: rgba(201, 242, 123, .08); transition: background .2s; }
+.nav-matcha:hover { background: rgba(201, 242, 123, .18); }
+@media (max-width: 640px) { .nav-matcha span { display: none; } }
+
 /* Hero */
 .hero { padding: 64px 0 32px; text-align: center; }
-.stage { height: 72px; display: grid; place-items: start center; margin-bottom: 26px; }
-.island { position: relative; height: 42px; width: 128px; max-width: 100%; border-radius: 999px; background: #000; border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 18px 50px rgba(0, 0, 0, .6), 0 0 60px rgba(61, 139, 255, .2); overflow: hidden; transition: width .6s var(--spring); }
+.island { position: absolute; top: 10px; left: 50%; translate: -50% 0; z-index: 3; height: 34px; width: 112px; max-width: calc(100% - 20px); border-radius: 999px; background: #000; border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 18px 50px rgba(0, 0, 0, .6), 0 0 60px rgba(61, 139, 255, .2); overflow: hidden; transition: width .6s var(--spring); }
 .island .s { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 14px; font-size: 13.5px; font-weight: 600; white-space: nowrap; opacity: 0; transform: scale(.9); filter: blur(4px); transition: opacity .3s, transform .45s var(--spring), filter .3s; }
 .island .s.on { opacity: 1; transform: none; filter: none; transition-delay: .2s; }
 .eyes { display: flex; gap: 9px; }
@@ -82,6 +87,37 @@ h2 { font-size: clamp(30px, 4.4vw, 44px); }
 .hero h1 em { font-style: normal; color: var(--cyan); text-shadow: 0 0 40px rgba(124, 247, 255, .35); }
 .hero .lead { color: #a9b6d4; font-size: clamp(16px, 2vw, 19px); max-width: 600px; margin: 20px auto 32px; }
 .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Desktop setengah layar */
+.desk { position: relative; max-width: 980px; margin: 52px auto 0; padding: 12px 12px 0; border-radius: 26px 26px 0 0; background: #0b0f1a; border: 1px solid rgba(255, 255, 255, .12); border-bottom: 0; box-shadow: 0 -10px 80px rgba(61, 139, 255, .18); -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+.screen { position: relative; height: clamp(250px, 36vw, 380px); border-radius: 16px 16px 0 0; overflow: hidden; text-align: left; background: radial-gradient(60% 90% at 50% 110%, #7aa8ff 0%, #bcd3ff 45%, #e9f0ff 100%); }
+.screen::before { content: ""; position: absolute; left: 50%; bottom: -60%; width: 70%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: conic-gradient(from 200deg, rgba(91, 140, 255, .55), rgba(160, 120, 255, .45), rgba(91, 200, 255, .5), rgba(91, 140, 255, .55)); filter: blur(30px); }
+.screen .island .s { font-size: 12.5px; color: #fff; }
+.screen .eyes i { width: 8px; height: 15px; }
+.win { position: absolute; z-index: 2; border-radius: 12px; background: rgba(255, 255, 255, .86); box-shadow: 0 20px 50px rgba(30, 50, 110, .25); border: 1px solid rgba(255, 255, 255, .7); color: #1b2333; overflow: hidden; }
+.win .bar { display: flex; gap: 5px; padding: 9px 11px; border-bottom: 1px solid rgba(0, 0, 0, .06); }
+.win .bar i { width: 8px; height: 8px; border-radius: 50%; background: #d6dbe6; }
+.w-doc { left: 6%; top: 74px; width: 46%; height: 240px; }
+.w-doc .ln { height: 9px; margin: 12px 16px 0; border-radius: 5px; background: #e3e8f2; }
+.w-doc .ln.t { width: 45%; height: 14px; margin-top: 16px; background: #c9d3e6; }
+.w-music { right: 6%; top: 104px; width: 34%; padding: 14px; display: flex; gap: 12px; align-items: center; }
+.w-music .art { width: 54px; height: 54px; border-radius: 12px; }
+.w-music b { display: block; font-size: 14px; }
+.w-music small { color: #6b7488; font-size: 12px; }
+.w-music .pg { height: 4px; margin-top: 8px; border-radius: 3px; background: #e3e8f2; overflow: hidden; }
+.w-music .pg i { display: block; height: 100%; width: 42%; background: #ff4f7b; border-radius: 3px; }
+@media (max-width: 640px) { .w-doc { width: 70%; left: 4%; } .w-music { display: none; } }
+
+.desk + .stats { position: relative; margin-top: -36px; }
+.desk + .stats .stat { background-color: #090e1a; }
+
+/* Matcha */
+.matcha { display: flex; align-items: center; gap: 22px; padding: 28px 30px; border-radius: 26px; border: 1px solid rgba(201, 242, 123, .28); background: radial-gradient(420px 220px at 0% 100%, rgba(127, 214, 90, .18), transparent 70%), rgba(255, 255, 255, .03); }
+.matcha .cup { flex: none; width: 64px; height: 64px; border-radius: 20px; display: grid; place-items: center; font-size: 32px; background: rgba(201, 242, 123, .12); border: 1px solid rgba(201, 242, 123, .3); }
+.matcha h3 { font-size: 21px; }
+.matcha p { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+.matcha .btn { margin-left: auto; flex: none; }
+@media (max-width: 640px) { .matcha { flex-direction: column; text-align: center; } .matcha .btn { margin: 0; width: 100%; } }
 
 /* Statistik */
 .stats { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; max-width: 760px; margin: 56px auto 0; }
@@ -160,6 +196,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
   <div class="wrap">
     <a class="brand" href="#"><span class="brand-mark"><i></i><i></i></span>ReyLand</a>
     <nav class="nav-links" aria-label="Navigasi"><a href="#fitur">Fitur</a><a href="#unduh">Unduh</a><a href="#faq">FAQ</a></nav>
+    <a class="nav-matcha" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">🍵<span>Traktir matcha</span></a>
     <a class="btn btn-primary" href="#unduh">Unduh</a>
   </div>
 </header>
@@ -167,20 +204,25 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
 <main>
 <section class="hero">
   <div class="wrap">
-    <div class="stage" aria-hidden="true">
-      <div class="island" id="island">
-        <div class="s on" data-w="128"><div class="eyes"><i></i><i></i></div></div>
-        <div class="s" data-w="310"><span class="art"></span><span>Lagu favoritmu<small>lirik berjalan</small></span><span class="eq"><i></i><i></i><i></i><i></i></span></div>
-        <div class="s" data-w="320"><span class="ava">D</span><span>Dinda<small>Nanti malam jadi nonton?</small></span></div>
-        <div class="s" data-w="250"><span class="dot" style="background:rgba(48,209,88,.18)">🕌</span><span>Maghrib 17.49<small>5 menit lagi</small></span></div>
-        <div class="s" data-w="250"><span class="dot" style="background:rgba(124,247,255,.15)">📱</span><span>Kirim ke HP<small>foto.jpg 82%</small></span></div>
-      </div>
-    </div>
     <h1>Bagian atas layarmu,<br><em>kini hidup.</em></h1>
     <p class="lead">ReyLand mengubah tepi atas layar Windows jadi island kecil: musik dan lirik, notifikasi, jadwal sholat, timer, dan kirim file ke HP. Muncul saat perlu, minggir saat tidak.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#unduh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Unduh gratis</a>
       <a class="btn btn-ghost" href="#fitur">Lihat semua fitur</a>
+      <a class="btn btn-matcha" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">🍵 Traktir matcha</a>
+    </div>
+    <div class="desk" aria-hidden="true">
+      <div class="screen">
+        <div class="island" id="island">
+          <div class="s on" data-w="112"><div class="eyes"><i></i><i></i></div></div>
+          <div class="s" data-w="280"><span class="art"></span><span>Lagu favoritmu<small>lirik berjalan</small></span><span class="eq"><i></i><i></i><i></i><i></i></span></div>
+          <div class="s" data-w="290"><span class="ava">D</span><span>Dinda<small>Nanti malam jadi nonton?</small></span></div>
+          <div class="s" data-w="230"><span class="dot" style="background:rgba(48,209,88,.25)">🕌</span><span>Maghrib 17.49<small>5 menit lagi</small></span></div>
+          <div class="s" data-w="230"><span class="dot" style="background:rgba(124,247,255,.2)">📱</span><span>Kirim ke HP<small>foto.jpg 82%</small></span></div>
+        </div>
+        <div class="win w-doc"><div class="bar"><i></i><i></i><i></i></div><div class="ln t"></div><div class="ln"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:60%"></div><div class="ln t" style="width:30%"></div><div class="ln"></div><div class="ln" style="width:72%"></div></div>
+        <div class="win w-music"><span class="art"></span><div style="flex:1"><b>Lagu favoritmu</b><small>Rey Music</small><div class="pg"><i></i></div></div></div>
+      </div>
     </div>
     <div class="stats">
       <div class="stat big"><span class="live">LIVE</span><b id="dlCount">9.000+</b><span>kali diunduh dari GitHub</span></div>
@@ -294,7 +336,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
           <p class="alt">Sudah punya .NET 8? Ada <a href="https://github.com/techreyy/ReyLand/releases/latest/download/ReyLand.exe">versi portable</a>.</p>
         </div>
       </div>
-      <p class="dl-foot">Windows 10 (2004+) / 11, 64-bit. Cukup pasang salah satu versi.<br>ReyLand gratis. Kalau suka, <a href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">traktir matcha 🍵</a></p>
+      <p class="dl-foot">Windows 10 (2004+) / 11, 64-bit. Cukup pasang salah satu versi.</p>
     </div>
   </div>
 </section>
@@ -312,6 +354,16 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
     </div>
   </div>
 </section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="matcha reveal">
+      <div class="cup">🍵</div>
+      <div><h3>Suka ReyLand? Traktir matcha.</h3><p>ReyLand gratis dan dibuat sendirian. Segelas matcha jadi penyemangat untuk fitur berikutnya.</p></div>
+      <a class="btn btn-matcha" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">🍵 Traktir matcha</a>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -323,6 +375,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
       <a href="https://github.com/techreyy/ReyLand" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/techreyy/ReyLand/issues" target="_blank" rel="noopener">Lapor masalah</a>
       <a href="privacy.html">Privasi</a>
+      <a href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener" style="color:var(--matcha)">Traktir matcha 🍵</a>
     </div>
     <span>Dibuat oleh @techreyy_</span>
   </div>
