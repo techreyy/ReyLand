@@ -65,6 +65,11 @@ h2 { font-size: clamp(30px, 4.4vw, 44px); }
 .nav-matcha { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 14px; color: #c9f27b; border: 1px solid rgba(201, 242, 123, .45); background: rgba(201, 242, 123, .08); transition: background .2s; }
 .nav-matcha:hover { background: rgba(201, 242, 123, .18); }
 @media (max-width: 640px) { .nav-matcha span { display: none; } }
+.nav-star { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 14px; color: #ffd76a; border: 1px solid rgba(255, 215, 106, .45); background: rgba(255, 215, 106, .08); transition: background .2s; }
+.nav-star:hover { background: rgba(255, 215, 106, .18); }
+.nav-star b:empty { display: none; }
+.nav-star b { font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .nav-star span { display: none; } }
 
 /* Hero */
 .hero { padding: 64px 0 32px; text-align: center; }
@@ -196,6 +201,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
   <div class="wrap">
     <a class="brand" href="#"><span class="brand-mark"><i></i><i></i></span>ReyLand</a>
     <nav class="nav-links" aria-label="Navigasi"><a href="#fitur">Fitur</a><a href="#unduh">Unduh</a><a href="#faq">FAQ</a></nav>
+    <a class="nav-star" href="https://github.com/techreyy/ReyLand" target="_blank" rel="noopener" title="Kasih bintang di GitHub">⭐<span>Kasih bintang</span><b id="starCount"></b></a>
     <a class="nav-matcha" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">🍵<span>Traktir matcha</span></a>
     <a class="btn btn-primary" href="#unduh">Unduh</a>
   </div>
@@ -416,6 +422,23 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
     })(t0);
   }
   countUp(document.getElementById("featCount"), document.querySelectorAll(".group li").length);
+
+  // Jumlah bintang repo, disimpan sejam juga. Kalau gagal, tombol tampil tanpa angka.
+  (function () {
+    var el = document.getElementById("starCount"), SK = "reyland-star-count";
+    function put(n) { if (n > 0) el.textContent = n.toLocaleString("id-ID"); }
+    try {
+      var sc = JSON.parse(localStorage.getItem(SK) || "null");
+      if (sc && Date.now() - sc.t < 36e5) return put(sc.n);
+    } catch (e) {}
+    fetch("https://api.github.com/repos/techreyy/ReyLand").then(function (r) {
+      if (!r.ok) throw 0;
+      return r.json();
+    }).then(function (repo) {
+      put(repo.stargazers_count);
+      try { localStorage.setItem(SK, JSON.stringify({ t: Date.now(), n: repo.stargazers_count })); } catch (e) {}
+    }).catch(function () {});
+  })();
 
   // Jumlah unduhan dari semua rilis GitHub, disimpan sejam supaya tidak kena batas API.
   var dl = document.getElementById("dlCount"), KEY = "reyland-dl-count";
