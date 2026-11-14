@@ -7,11 +7,12 @@
 <meta name="description" content="ReyLand mengubah bagian atas layar Windows jadi island hidup: musik dan lirik, notifikasi, jadwal sholat, timer, shelf file, tangkap layar, dan kirim file ke HP. Gratis, ada di Microsoft Store.">
 <meta property="og:title" content="ReyLand — Dynamic Island untuk Windows">
 <meta property="og:description" content="Musik dan lirik, notifikasi, jadwal sholat, timer, dan kirim file ke HP, langsung di atas layar Windows. Gratis.">
-<meta name="theme-color" content="#04060c">
+<meta name="theme-color" content="#04060c" media="(min-width: 641px)">
+<meta name="theme-color" content="#f5f6f7" media="(max-width: 640px)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='14' width='60' height='36' rx='18' fill='%2304060c'/%3E%3Crect x='20' y='22' width='9' height='20' rx='4.5' fill='%237CF7FF'/%3E%3Crect x='35' y='22' width='9' height='20' rx='4.5' fill='%237CF7FF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #04060c;
@@ -193,6 +194,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
 /* ReyLand 2.0: segera hadir */
 .soon-pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px; padding: 6px 14px 6px 8px; border-radius: 999px; font-size: 13.5px; font-weight: 700; color: var(--text); background: rgba(124, 247, 255, .07); border: 1px solid rgba(124, 247, 255, .25); }
 .soon-pill b { padding: 2px 9px; border-radius: 999px; font: 700 11px var(--mono); letter-spacing: .08em; color: #00131a; background: var(--cyan); }
@@ -223,6 +225,93 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
 .soon-foot b { color: var(--text); }
 @media (max-width: 960px) { .soon-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px) { .soon-grid { grid-template-columns: 1fr; } .soon-card.hot { grid-column: auto; grid-row: auto; } }
+
+/* ============ HP: minimalis, terang, gaya wutaget (garis tinta, bayangan keras, aksen lime) ============ */
+@media (max-width: 640px) {
+  :root { --bg: #f5f6f7; --text: #18181b; --muted: #5f5f66; --line: #d6d6da; --ink: #18181b; --soft: #eef0f2; --accent: #d4f53c; --matcha: #3f7d1c; }
+  body { font-family: "Atkinson Hyperlegible", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+  body::before { display: none; }
+  h1, h2, h3, .brand, .btn, .stat b, summary { font-family: "Bricolage Grotesque", system-ui, sans-serif; }
+  section { padding: 52px 0; }
+  .head { margin-bottom: 28px; }
+  .head p { font-size: 16px; }
+  .eyebrow { display: inline-block; padding: 3px 11px; border: 2px solid var(--ink); border-radius: 999px; background: var(--accent); color: var(--ink); font-size: 11px; }
+
+  /* Tombol: pil dengan garis tinta dan bayangan keras */
+  .btn { border: 2px solid var(--ink); color: var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+  .btn-primary, .btn-primary:hover { background: var(--accent); color: var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .btn-ghost, .btn-ghost:hover { background: #fff; border-color: var(--ink); }
+  .btn-matcha, .btn-matcha:hover { background: #c9f27b; color: var(--ink); box-shadow: 0 4px 0 var(--ink); }
+
+  /* Header pil melayang */
+  .nav, .nav.scrolled { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border: 0; padding: 10px 12px 0; }
+  .nav .wrap { width: 100%; height: 58px; gap: 6px; padding: 0 6px 0 14px; border: 2px solid var(--ink); border-radius: 999px; background: rgba(255, 255, 255, .92); box-shadow: 0 4px 0 var(--ink); }
+  .brand { margin-right: auto; color: var(--ink); }
+  .brand-mark { background: var(--ink); border-color: var(--ink); }
+  .brand-mark i { background: var(--accent); box-shadow: none; }
+  .nav-star, .nav-matcha { height: 40px; min-width: 40px; justify-content: center; padding: 0 10px; border: 0; background: var(--soft); color: var(--ink); }
+  .nav .btn { margin-left: 0; padding: 8px 16px; box-shadow: none; }
+
+  /* Hero: tanpa mockup desktop */
+  .hero { padding: 40px 0 8px; }
+  .hero h1 { font-size: clamp(32px, 10vw, 40px); }
+  .hero h1 em { color: var(--ink); text-shadow: none; background: linear-gradient(transparent 58%, var(--accent) 58%); padding: 0 4px; }
+  .hero .lead { color: var(--muted); font-size: 16.5px; margin: 16px auto 26px; }
+  .cta { flex-direction: column; gap: 14px; }
+  .cta .btn { width: 100%; padding: 14px 20px; }
+  .desk { display: none; }
+  .desk + .stats { margin-top: 32px; }
+
+  /* Kartu putih bergaris tinta */
+  .stat, .desk + .stats .stat, .group, .dl-card, .dl-card.store, .matcha { background: #fff; border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .stat { border-radius: 18px; padding: 16px 18px; }
+  .stat span { color: var(--muted); }
+  .stat.big, .desk + .stats .stat.big { background: var(--accent); }
+  .stat.big b { color: var(--ink); text-shadow: none; font-size: 40px; }
+  .stat.big span { color: var(--ink); }
+  .stat.big .live { color: var(--ink); }
+  .stat.big .live::before { background: var(--ink); box-shadow: none; }
+
+  .group { border-radius: 20px; padding: 20px 18px 6px; }
+  .group h3 span { background: var(--soft); border: 0; }
+  .group li { border-color: var(--line); }
+
+  .dl { padding: 0; border: 0; border-radius: 0; background: none; }
+  .dl-cards { gap: 22px; }
+  .dl-card { border-radius: 20px; padding: 26px 20px 20px; }
+  .dl-card.store { box-shadow: 0 6px 0 var(--ink); }
+  .badge { background: var(--accent); color: var(--ink); border: 2px solid var(--ink); }
+  .dl-card .meta, .dl-card .alt, .dl-foot { color: var(--muted); }
+  .dl-card li { color: var(--ink); }
+  .dl-card li::before { color: #1f9254; }
+  .dl-card .alt a, .dl-foot a, details a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  details { border-color: var(--line); }
+  summary::after { color: var(--ink); }
+  details b { color: var(--ink); }
+
+  .matcha { border-radius: 22px; padding: 24px 18px; }
+  .matcha .cup { background: var(--accent); border: 2px solid var(--ink); }
+
+  footer { border-color: var(--line); }
+  footer .brand { color: var(--ink); }
+  footer a:hover { color: var(--ink); }
+
+  .soon-pill { background: #fff; border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink); color: var(--ink); }
+  .soon-pill b { background: var(--accent); color: var(--ink); }
+  .soon-card, .soon-card.hot { background: #fff; border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink); border-radius: 20px; }
+  .soon-card.hot { background: var(--accent); }
+  .soon-card i { background: var(--soft); border: 0; }
+  .soon-card.hot i { background: #fff; }
+  .soon-card.hot p { color: var(--ink); }
+  .soon-tag { color: var(--ink); border: 2px solid var(--ink); background: #fff; }
+  .soon-foot b { color: var(--ink); }
+
+  /* Konten langsung tampil: tanpa animasi muncul, lebih ringan di HP */
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 </style>
 </head>
 <body>
@@ -240,7 +329,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
 <main>
 <section class="hero">
   <div class="wrap">
-    <a class="soon-pill" href="#segera"><b>SEGERA</b>ReyLand 2.0 sedang disiapkan →</a>
+    <a class="soon-pill" href="#segera"><b>BARU</b>ReyLand 2.0 sudah rilis →</a>
     <h1>Bagian atas layarmu,<br><em>kini hidup.</em></h1>
     <p class="lead">ReyLand mengubah tepi atas layar Windows jadi island kecil: musik dan lirik, notifikasi, jadwal sholat, timer, dan kirim file ke HP. Muncul saat perlu, minggir saat tidak.</p>
     <div class="cta">
@@ -272,9 +361,9 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
 <section id="segera">
   <div class="wrap">
     <div class="head reveal">
-      <span class="eyebrow">Coming soon · ReyLand 2.0</span>
-      <h2>ReyLand 2.0, segera hadir.</h2>
-      <p>Island dirombak total. Fitur di bawah ini sedang disiapkan dan belum ada di versi yang bisa diunduh sekarang.</p>
+      <span class="eyebrow">Baru · ReyLand 2.0</span>
+      <h2>ReyLand 2.0 sudah hadir.</h2>
+      <p>Island dirombak total. Semua yang di bawah ini sudah ada di versi yang bisa kamu unduh sekarang.</p>
     </div>
     <div class="soon-grid">
       <div class="soon-card hot reveal"><span class="soon-tag">BARU</span><div class="ai-mock" aria-hidden="true"><div class="top"><span style="color:var(--cyan)">✦</span>Antigravity <em>minta izin</em><small>toko-online</small><span class="n">+2</span></div><div class="cmd"><small>Jalankan perintah</small><code>npm install express &amp;&amp; npm run dev</code></div><div class="act"><span class="no">Tolak</span><span class="yes">Setujui</span></div></div><i>🤖</i><b>Izin AI coding di island</b><p>Saat Antigravity (Gemini) atau Claude Code minta izin menjalankan perintah, kartunya muncul di island. Tinggal pilih Tolak atau Setujui, tanpa bolak-balik ke terminal. Ada kabar juga saat AI selesai.</p></div>
@@ -287,7 +376,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
       <div class="soon-card reveal"><i>📱</i><b>Sambung HP versi baru</b><p>Halaman di HP berganti tampilan dengan aksen biru.</p></div>
       <div class="soon-card reveal" style="--d:1"><i>🐛</i><b>Lebih ringan dan stabil</b><p>Banyak bug diberesin, memori wallpaper 4K langsung dilepas.</p></div>
     </div>
-    <p class="soon-foot reveal">Sudah pakai ReyLand? Versi 2.0 nanti datang lewat <b>Pengaturan → Cek sekarang</b>. Bocoran setelahnya: <b>dock</b>, insya Allah.</p>
+    <p class="soon-foot reveal">Sudah pakai ReyLand? Perbarui ke 2.0 lewat <b>Pengaturan → Cek sekarang</b>. Bocoran setelahnya: <b>dock</b>, insya Allah.</p>
   </div>
 </section>
 
@@ -367,7 +456,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
   <div class="wrap">
     <div class="dl reveal">
       <div class="head">
-        <span class="eyebrow">Unduh · Versi 1.5.1</span>
+        <span class="eyebrow">Unduh · Versi 2.0.0</span>
         <h2>Pasang ReyLand sekarang.</h2>
         <p>Pilih salah satu. Dua-duanya gratis, isinya sama, dan memperbarui diri otomatis.</p>
       </div>
