@@ -193,6 +193,36 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+/* ReyLand 2.0: segera hadir */
+.soon-pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px; padding: 6px 14px 6px 8px; border-radius: 999px; font-size: 13.5px; font-weight: 700; color: var(--text); background: rgba(124, 247, 255, .07); border: 1px solid rgba(124, 247, 255, .25); }
+.soon-pill b { padding: 2px 9px; border-radius: 999px; font: 700 11px var(--mono); letter-spacing: .08em; color: #00131a; background: var(--cyan); }
+.soon-pill:hover { border-color: var(--cyan); }
+.soon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.soon-card { position: relative; padding: 22px 20px 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
+.soon-card i { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 14px; border-radius: 12px; font-style: normal; font-size: 20px; background: rgba(124, 247, 255, .08); border: 1px solid rgba(124, 247, 255, .18); }
+.soon-card b { display: block; font-size: 15.5px; line-height: 1.3; }
+.soon-card.hot b { font-size: 22px; }
+.soon-card.hot p { font-size: 15px; }
+.soon-card.hot i { width: 52px; height: 52px; font-size: 26px; }
+.soon-card p { margin-top: 6px; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+.soon-card.hot { grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; justify-content: flex-end; border-color: transparent; background: linear-gradient(#081022, #081022) padding-box, linear-gradient(135deg, var(--cyan), var(--blue) 55%, rgba(124, 247, 255, .15)) border-box; }
+.soon-tag { position: absolute; top: 18px; right: 16px; padding: 3px 9px; border-radius: 999px; font: 700 10.5px var(--mono); letter-spacing: .08em; color: var(--cyan); border: 1px solid rgba(124, 247, 255, .35); }
+.ai-mock { margin: 6px auto 22px; width: min(100%, 400px); padding: 14px 16px 14px; border-radius: 26px; background: #000; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 18px 50px rgba(61, 139, 255, .25); color: #fff; font-size: 13px; }
+.ai-mock .top { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.ai-mock .top em { font-style: normal; color: #9aa3b5; font-weight: 600; }
+.ai-mock .top small { margin-left: auto; color: #9aa3b5; font-weight: 500; }
+.ai-mock .top .n { padding: 0 7px; border-radius: 8px; font-size: 11px; color: var(--cyan); border: 1px solid rgba(124, 247, 255, .4); background: rgba(124, 247, 255, .1); }
+.ai-mock .cmd { margin: 10px 0; padding: 8px 11px; border-radius: 12px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); }
+.ai-mock .cmd small { display: block; color: #9aa3b5; font-size: 11px; }
+.ai-mock .cmd code { font: 500 12.5px var(--mono); }
+.ai-mock .act { display: flex; justify-content: flex-end; gap: 8px; }
+.ai-mock .act span { padding: 5px 18px; border-radius: 99px; font-weight: 700; font-size: 12.5px; }
+.ai-mock .no { color: #ff8c80; background: rgba(255, 90, 78, .18); border: 1px solid rgba(255, 90, 78, .4); }
+.ai-mock .yes { color: var(--cyan); background: rgba(124, 247, 255, .1); border: 1px solid rgba(124, 247, 255, .45); }
+.soon-foot { margin-top: 26px; text-align: center; color: var(--muted); font-size: 14.5px; }
+.soon-foot b { color: var(--text); }
+@media (max-width: 960px) { .soon-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .soon-grid { grid-template-columns: 1fr; } .soon-card.hot { grid-column: auto; grid-row: auto; } }
 </style>
 </head>
 <body>
@@ -200,7 +230,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#"><span class="brand-mark"><i></i><i></i></span>ReyLand</a>
-    <nav class="nav-links" aria-label="Navigasi"><a href="#fitur">Fitur</a><a href="#unduh">Unduh</a><a href="#faq">FAQ</a></nav>
+    <nav class="nav-links" aria-label="Navigasi"><a href="#segera">2.0</a><a href="#fitur">Fitur</a><a href="#unduh">Unduh</a><a href="#faq">FAQ</a></nav>
     <a class="nav-star" href="https://github.com/techreyy/ReyLand" target="_blank" rel="noopener" title="Kasih bintang di GitHub">⭐<span>Kasih bintang</span><b id="starCount"></b></a>
     <a class="nav-matcha" href="https://sociabuzz.com/techreyy" target="_blank" rel="noopener">🍵<span>Traktir matcha</span></a>
     <a class="btn btn-primary" href="#unduh">Unduh</a>
@@ -210,6 +240,7 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
 <main>
 <section class="hero">
   <div class="wrap">
+    <a class="soon-pill" href="#segera"><b>SEGERA</b>ReyLand 2.0 sedang disiapkan →</a>
     <h1>Bagian atas layarmu,<br><em>kini hidup.</em></h1>
     <p class="lead">ReyLand mengubah tepi atas layar Windows jadi island kecil: musik dan lirik, notifikasi, jadwal sholat, timer, dan kirim file ke HP. Muncul saat perlu, minggir saat tidak.</p>
     <div class="cta">
@@ -235,6 +266,28 @@ footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
       <div class="stat"><b id="featCount">30+</b><span>fitur dalam satu island</span></div>
       <div class="stat"><b>Gratis</b><span>tanpa akun, tanpa iklan</span></div>
     </div>
+  </div>
+</section>
+
+<section id="segera">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Coming soon · ReyLand 2.0</span>
+      <h2>ReyLand 2.0, segera hadir.</h2>
+      <p>Island dirombak total. Fitur di bawah ini sedang disiapkan dan belum ada di versi yang bisa diunduh sekarang.</p>
+    </div>
+    <div class="soon-grid">
+      <div class="soon-card hot reveal"><span class="soon-tag">BARU</span><div class="ai-mock" aria-hidden="true"><div class="top"><span style="color:var(--cyan)">✦</span>Antigravity <em>minta izin</em><small>toko-online</small><span class="n">+2</span></div><div class="cmd"><small>Jalankan perintah</small><code>npm install express &amp;&amp; npm run dev</code></div><div class="act"><span class="no">Tolak</span><span class="yes">Setujui</span></div></div><i>🤖</i><b>Izin AI coding di island</b><p>Saat Antigravity (Gemini) atau Claude Code minta izin menjalankan perintah, kartunya muncul di island. Tinggal pilih Tolak atau Setujui, tanpa bolak-balik ke terminal. Ada kabar juga saat AI selesai.</p></div>
+      <div class="soon-card reveal" style="--d:1"><i>🪟</i><b>Tampilan kaca baru</b><p>Panel kaca gelap yang kalem, warna hanya di tombol yang aktif.</p></div>
+      <div class="soon-card reveal" style="--d:2"><i>🎛️</i><b>Tab Kontrol</b><p>Wi-Fi, Bluetooth, mode gelap, plus slider volume dan kecerahan yang tebal.</p></div>
+      <div class="soon-card reveal"><i>🎨</i><b>Tab Gaya</b><p>Ganti tema island dan pilih dari 5 wallpaper bawaan ReyLand.</p></div>
+      <div class="soon-card reveal" style="--d:1"><i>⏱️</i><b>Panel yang lebih enak</b><p>Timer berbentuk cincin, gelas pengingat minum, tombol tangkap layar yang besar.</p></div>
+      <div class="soon-card reveal" style="--d:2"><i>🔔</i><b>Notifikasi lebih rapi</b><p>Atur lama tampilnya atau tutup langsung. Banner dan indikator volume Windows disembunyikan, jadi tidak dobel.</p></div>
+      <div class="soon-card reveal" style="--d:3"><i>⚙️</i><b>Pengaturan baru</b><p>Pratinjau island yang langsung berubah, plus kolom cari.</p></div>
+      <div class="soon-card reveal"><i>📱</i><b>Sambung HP versi baru</b><p>Halaman di HP berganti tampilan dengan aksen biru.</p></div>
+      <div class="soon-card reveal" style="--d:1"><i>🐛</i><b>Lebih ringan dan stabil</b><p>Banyak bug diberesin, memori wallpaper 4K langsung dilepas.</p></div>
+    </div>
+    <p class="soon-foot reveal">Sudah pakai ReyLand? Versi 2.0 nanti datang lewat <b>Pengaturan → Cek sekarang</b>. Bocoran setelahnya: <b>dock</b>, insya Allah.</p>
   </div>
 </section>
 
